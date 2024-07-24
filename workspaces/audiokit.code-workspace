@@ -1,0 +1,32 @@
+{
+	"folders": [
+        {
+            "path": "../projects/audiokit"
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "yt_asr_u16_gbk.h": "c",
+            "bitset": "c",
+            "string_view": "c",
+            "common.h": "c",
+            "asr.h": "c",
+            "new": "cpp",
+            "data-interface.h": "c",
+            "compute-filter-bank.h": "c",
+            "cmvn.h": "c",
+            "vad.h": "c",
+            "ytv_core_engine.h": "c",
+            "chrono": "c",
+            "functional": "c",
+            "cmath": "cpp",
+            "*.inc": "cpp",
+            "webrtc_vad.h": "c",
+            "slide_buffer.h": "c",
+            "*.tcc": "cpp",
+            "pcm.h": "c",
+            "router.h": "c",
+            "cstdlib": "cpp"
+        }
+    }
+}

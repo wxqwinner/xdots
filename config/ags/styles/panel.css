@@ -1,0 +1,6 @@
+window.panel {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    border-radius: 20px;
+    opacity: 0.8;
+}

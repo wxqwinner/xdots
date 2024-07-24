@@ -1,0 +1,27 @@
+import = ["~/.config/alacritty/dracula.toml"]
+
+# font setting
+[font]
+size = 14.0
+
+[font.bold]
+family = "Source Code Pro"
+style = "Bold"
+
+[font.italic]
+family = "Source Code Pro"
+style = "Italic"
+
+[font.normal]
+family = "Source Code Pro"
+style = "Regular"
+
+[selection]
+save_to_clipboard = true
+
+[window]
+  startup_mode = "Maximized"
+  decorations = "none"
+  opacity = 0.9
+  decorations_theme_variant = "Dark"
+  padding = {x = 10, y = 10}

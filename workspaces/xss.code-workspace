@@ -1,0 +1,57 @@
+{
+	"folders": [
+        {
+            "path": "../projects/xss/"
+        },
+        {
+            "path": "../projects/xss/xesl"
+        },
+        {
+            "path": "../projects/xss/otaserver"
+        },
+        {
+            "path": "../projects/xss/docs"
+        },
+        {
+            "path": "../projects/xss/mod_sherpa"
+        }
+    ],
+    "settings": {
+        "vsmqtt.brokerProfiles": [
+            {
+                "name": "2.138",
+                "host": "192.168.0.137",
+                "port": 1884,
+                "clientId": "vsmqtt_client_shacon",
+                "username": "mosquitto",
+                "password": "mXyCQhv6Cy+rfDCm"
+            },
+            {
+                "name": "local",
+                "host": "192.168.1.7",
+                "port": 1884,
+                "clientId": "vsmqtt_client_shacon",
+                "username": "mosquitto",
+                "password": "mXyCQhv6Cy+rfDCm"
+            },
+            {
+                "name": "1.138",
+                "host": "192.168.1.138",
+                "port": 1884,
+                "clientId": "vsmqtt_client_shacon",
+                "username": "mosquitto",
+                "password": "mXyCQhv6Cy+rfDCm"
+            },
+            {
+                "name": "test",
+                "host": "192.168.1.138",
+                "port": 1883,
+                "clientId": "vsmqtt_client_7e53"
+            }
+        ],
+        "files.associations": {
+            "compare": "c",
+            "cstdint": "c"
+        }
+    }
+}

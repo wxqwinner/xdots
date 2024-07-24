@@ -1,0 +1,13 @@
+{
+	"folders": [
+        {
+            "path": "../projects/xhub"
+        },
+        {
+            "path": "../projects/xhub/codes"
+        }
+    ],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": "xhub"
+    }
+}
