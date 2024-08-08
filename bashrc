@@ -67,9 +67,6 @@ alias proxyoff='proxy_off'
 alias preproxy='pre_proxy'
 alias proxytest='preproxy curl cip.cc'
 
-# Safe rm
-#alias rm='echo "rm is dangerous, use trash-put instead."; rm -i'
-#alias rm='bash /home/shacon/Workspace/bin/safe_rm/safe_rm.sh'
 
 # undistract-me
 export IGNORE_WINDOW_CHECK=1
@@ -86,8 +83,7 @@ export HISTFILESIZE=10000
 # safe rm
 # If the last character of the alias value is a blank, then the next command word following the alias is also checked for alias expansion.
 alias sudo='sudo '
-alias trash-put='bash /home/shacon/Software/bin/safe_rm/move_to_trash.sh'
-alias rm='bash /home/shacon/Software/bin/safe_rm/safe_rm.sh'
+alias rm='bash ~/Software/bin/safe_rm/move_to_trash.sh'
 
 # copy current path to clip
 alias ccp='pwd | awk '\''{printf $0}'\'' | xclip -sel clip'
@@ -111,7 +107,7 @@ function gen_passwd() {
 }
 
 # 自定义cheats路径
-export NAVI_PATH="/home/shacon/Workspace/docs/cheats"
+export NAVI_PATH="~/Archives/docs/cheats"
 eval "$(navi widget bash)"
 
 # 从.env文件中导入环境变量
@@ -127,11 +123,6 @@ function myenvs() {
 		fi
 	fi
 }
-
-# wine
-export WINEARCH=win64
-alias reboot='wineserver -k && reboot '
-alias shutdown='wineserver -k && shutdown '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
