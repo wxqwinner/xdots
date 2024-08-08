@@ -3,7 +3,7 @@ window.bar {
     background-color: @theme_bg_color;
     color: @theme_fg_color;
     border-radius: 20px;
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 button {
