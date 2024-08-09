@@ -2,6 +2,7 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { Volume } from './volume.js'
 import { Battery } from './battery.js'
 import { Brightness } from './brightness.js'
+import { Micphone } from './micphone.js'
 import { clickCloseRegion } from '../.widgets/clickcloseregion.js';
 const WINDOW_NAME = "panel"
 
@@ -22,6 +23,7 @@ const Panel = () => {
         css: `min-width: 400px; margin:10px`,
         children: [
             Battery(),
+            Micphone(),
             Volume(),
             Brightness(),
         ],
