@@ -181,7 +181,6 @@ function Left() {
         spacing: 8,
         children: [
             Workspaces(),
-            LanIPAddress(),
             ClientTitle(),
         ],
     })
@@ -225,6 +224,7 @@ function Right() {
             SysTray(),
             Caffeine(),
             Potato(),
+            LanIPAddress(),
             Indicator(),
         ],
     })
