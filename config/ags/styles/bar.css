@@ -40,6 +40,7 @@ label {
 .lan-ipaddress 
 {
     color: @theme_fg_color;
+    min-height: 30px;
 }
 
 .notification {

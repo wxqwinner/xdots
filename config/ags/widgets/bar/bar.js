@@ -223,7 +223,7 @@ function Right() {
         children: [
             SysTray(),
             Caffeine(),
-            Potato(),
+            // Potato(),
             LanIPAddress(),
             Indicator(),
         ],
