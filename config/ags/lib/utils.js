@@ -1,4 +1,5 @@
 import GLib from 'gi://GLib';
+const hyprland = await Service.import("hyprland");
 
 export const getLanIp = () => {
     // Ask the IP stack what route would be used to reach 1.1.1.1 (Cloudflare DNS)
@@ -16,5 +17,18 @@ export const getLanIp = () => {
         return matches[0].split(' ')[1];
     } else {
         return '';
+    }
+}
+
+export function getMonitorIDByName(monitor_name) {
+    let monitors = hyprland.monitors;
+
+    for (let monitorIndex = 0; monitorIndex < monitors.length; monitorIndex++) {
+        const monitor = monitors[monitorIndex];
+        let { id, name } = monitor;
+        if (name == monitor_name)
+        {
+            return id;
+        }
     }
 }

@@ -19,7 +19,7 @@ const date = Variable("", {
 
 function Workspaces() {
     const activeId = hyprland.active.workspace.bind("id")
-    const workspaces = hyprland.bind("workspaces").as(ws => 
+    const workspaces = hyprland.bind("workspaces").as(ws =>
         ws
         .filter(({ id }) => id > 0)
         .sort((a, b) => a.id - b.id)
@@ -246,5 +246,3 @@ export function Bar(monitor = 0) {
         }),
     })
 }
-
-

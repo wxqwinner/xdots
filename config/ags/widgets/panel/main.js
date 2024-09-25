@@ -45,7 +45,6 @@ const Panel = () => {
 export const panel = Widget.Window({
     name: WINDOW_NAME,
     class_name: "panel",
-    monitor: 0,
     layer: 'overlay',
     anchor: ['top', 'right'],
     // setup: self => self.keybind("Escape", () => {
@@ -55,4 +54,3 @@ export const panel = Widget.Window({
     keymode: "exclusive",
     child:  Panel(),
 })
-

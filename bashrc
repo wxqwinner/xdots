@@ -145,6 +145,14 @@ source /usr/share/nvm/init-nvm.sh
 # for gdb
 ulimit -c 409600
 
+# for platforms
+export GCC75_PREFIX="/opt/platforms/gcc75/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
+export GCC75_ROOTFS="/opt/platforms/gcc75/rootfs"
+export S905X3_PREFIX="/opt/platforms/s905x3/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-"
+export S905X3_ROOTFS="/opt/platforms/s905x3/rootfs"
+export IMX6Q_PREFIX="/opt/poky/1.4.1/sysroots/i686-pokysdk-linux/usr/bin/cortexa9hf-vfp-neon-poky-linux-gnueabi/arm-poky-linux-gnueabi-"
+export IMX6Q_ROOTFS="/opt/platforms/imx6q/rootfs"
+
 export PATH="/opt/platforms/x64/rootfs/bin:$PATH"
 export PATH="~/Software/bin:$PATH"
 export ELECTRON_OZONE_PLATFORM_HINT=auto

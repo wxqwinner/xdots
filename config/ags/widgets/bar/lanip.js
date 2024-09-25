@@ -2,7 +2,7 @@ import * as Generic from '../../lib/utils.js';
 
 export function  LanIPAddress() {
     return Widget.Label({
-        class_name: "lan-ipaddress", 
+        class_name: "lan-ipaddress",
         label: Generic.getLanIp(),
         justification: 'left',
         truncate: 'end',
