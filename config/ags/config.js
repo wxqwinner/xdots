@@ -12,7 +12,7 @@ Gtk.IconTheme.get_default().append_search_path(`${App.configDir}/assets/icons`);
 App.config({
     style: "./styles/main.css",
     windows: [
-        Bar(Generic.getMonitorIDByName("eDP-1")),
+        Bar(Generic.getMonitorIDByName("eDP-2")),
         launcher,
         panel,
         // NotificationPopups(),
