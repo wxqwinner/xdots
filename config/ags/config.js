@@ -1,6 +1,7 @@
 import { Bar } from "./widgets/bar/bar.js";
 import { launcher } from "./widgets/launcher/launcher.js";
 import { panel } from "./widgets/panel/main.js";
+import { resttime } from "./widgets/resttime/main.js"
 const { Gdk, Gtk } = imports.gi;
 import App from 'resource:///com/github/Aylur/ags/app.js'
 import userOptions from './widgets/.widgets/option.js';
@@ -15,6 +16,7 @@ App.config({
         Bar(Generic.getMonitorIDByName("eDP-2")),
         launcher,
         panel,
+        resttime,
         // NotificationPopups(),
         // you can call it, for each monitor
         // Bar(0),

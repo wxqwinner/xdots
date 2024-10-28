@@ -106,4 +106,3 @@ export const launcher = Widget.Window({
         spacing: 12,
     }),
 })
-

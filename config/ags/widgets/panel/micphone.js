@@ -8,7 +8,7 @@ export function Micphone() {
         30: "micphone_30",
         10: "micphone_10",
         1: "micphone_1",
-        0: "micphone_mute",
+        0: "micphone_0",
     }
 
     function getIcon() {

@@ -85,7 +85,7 @@ function Micophone() {
         30: "micphone_30",
         10: "micphone_10",
         1: "micphone_1",
-        0: "micphone_mute",
+        0: "micphone_0",
     }
 
     function getIcon() {
@@ -216,6 +216,20 @@ function Indicator() {
     });
 }
 
+function Resttime() {
+    let isCaffeineOn = false;
+    let icon = Widget.Icon({ icon: 'resttime'});
+
+
+    return Widget.Button({
+        child: icon,
+        onClicked: () => {
+            App.toggleWindow('resttime');
+        },
+    });
+}
+
+
 function Right() {
     return Widget.Box({
         hpack: "end",
@@ -223,6 +237,7 @@ function Right() {
         children: [
             SysTray(),
             Caffeine(),
+            Resttime(),
             // Potato(),
             LanIPAddress(),
             Indicator(),
