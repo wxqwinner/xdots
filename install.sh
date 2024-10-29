@@ -23,3 +23,5 @@ ln -s ${current_dir}/tmux.conf ~/.tmux.conf
 
 mv ~/.bashrc .bak
 ln -s ${current_dir}/bashrc ~/.bashrc
+
+ln -s ${current_dir}/config/thunar/ ~/.config/Thunar
