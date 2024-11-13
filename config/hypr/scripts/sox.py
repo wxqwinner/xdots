@@ -90,6 +90,15 @@ CONVERTER = {
         "param": {"gopts": "--magic", "ifopts": "", "ofopts": "-t raw"},
         "ext_type": ["wav"],
     },
+    "merge_r16000c1i16": {
+        "suffix": "_r16000_c1_i16",
+        "param": {
+            "gopts": "--magic",
+            "ifopts": "",
+            "ofopts": "-r 16000 -c 1 -e signed-integer -b 16",
+        },
+        "ext_type": ["wav"],
+    },
 }
 
 
@@ -127,9 +136,7 @@ def change_uri(old_path, suffix, new_extension):
 #         pass
 
 
-def convert(convert_type, file):
-    converter = CONVERTER[convert_type]
-
+def process_file(converter, file):
     in_ext_type = get_file_ext(file)
 
     if in_ext_type not in ["raw", "pcm", "wav"]:
@@ -163,10 +170,44 @@ def convert(convert_type, file):
     process.wait()
 
 
+def process_files(converter, files):
+    gopts = converter["param"]["gopts"]
+    ifopts = converter["param"]["ifopts"]
+    ofopts = converter["param"]["ofopts"]
+
+    suffix = converter["suffix"]
+
+    file = os.path.join(os.path.dirname(files[0]), "merge.wav")
+
+    out_ext_type = "wav"
+
+    out_uri = find_uri_not_in_use(change_uri(file, suffix, out_ext_type))
+
+    files = " ".join(files)
+
+    process = subprocess.Popen(
+        f"exec sox {gopts} {ifopts} {files} {ofopts} {out_uri}", shell=True
+    )
+
+    process.wait()
+
+
+def convert(convert_type, files):
+
+    print(convert_type)
+    converter = CONVERTER[convert_type]
+
+    if convert_type == "merge_r16000c1i16":
+        process_files(converter, files)
+    else:
+        for file in files:
+            process_file(converter, file)
+
+
 def main():
     args = sys.argv
-    for file in args[2:]:
-        convert(args[1], file)
+    files = args[2:]
+    convert(args[1], files)
 
 
 if __name__ == "__main__":

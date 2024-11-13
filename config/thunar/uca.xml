@@ -155,4 +155,20 @@
 	<text-files/>
 	<video-files/>
 </action>
+<action>
+	<icon></icon>
+	<name>merge_r16000c1i16</name>
+	<submenu>Sox...</submenu>
+	<unique-id>1731316924071142-1</unique-id>
+	<command>python ~/.config/hypr/scripts/sox.py merge_r16000c1i16 %F</command>
+	<description>merge audio</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
 </actions>
