@@ -136,7 +136,8 @@ def change_uri(old_path, suffix, new_extension):
 #         pass
 
 
-def process_file(converter, file):
+def process_file(convert_type, file):
+    converter = CONVERTER[convert_type]
     in_ext_type = get_file_ext(file)
 
     if in_ext_type not in ["raw", "pcm", "wav"]:
@@ -170,7 +171,8 @@ def process_file(converter, file):
     process.wait()
 
 
-def process_files(converter, files):
+def process_files(convert_type, files):
+    converter = CONVERTER[convert_type]
     gopts = converter["param"]["gopts"]
     ifopts = converter["param"]["ifopts"]
     ofopts = converter["param"]["ofopts"]
@@ -193,15 +195,11 @@ def process_files(converter, files):
 
 
 def convert(convert_type, files):
-
-    print(convert_type)
-    converter = CONVERTER[convert_type]
-
     if convert_type == "merge_r16000c1i16":
-        process_files(converter, files)
+        process_files(convert_type, files)
     else:
         for file in files:
-            process_file(converter, file)
+            process_file(convert_type, file)
 
 
 def main():
