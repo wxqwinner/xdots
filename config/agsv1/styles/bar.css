@@ -2,7 +2,7 @@
 window.bar {
     background-color: @theme_bg_color;
     color: @theme_fg_color;
-    border-radius: 20px;
+    border-radius: 15px;
     opacity: 0.85;
 }
 
@@ -37,7 +37,7 @@ label {
     color: @theme_selected_bg_color;
 }
 
-.lan-ipaddress 
+.lan-ipaddress
 {
     color: @theme_fg_color;
     min-height: 30px;
