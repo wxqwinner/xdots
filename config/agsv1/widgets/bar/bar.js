@@ -10,7 +10,7 @@ const audio = await Service.import("audio")
 const systemtray = await Service.import("systemtray")
 
 const date = Variable("", {
-    poll: [1000, 'date "+%H:%M:%S %A %b %e."'],
+    poll: [1000, 'date "+%H:%M %A %b %e."'],
 })
 
 // widgets can be only assigned as a child in one container
