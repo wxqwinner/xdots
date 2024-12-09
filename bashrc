@@ -15,6 +15,9 @@ export QT_IM_MODULE=fcitx
 export GTK_IM_MODULE=fcitx
 export XIM=fcitx
 export EDITOR=/usr/bin/vim
+export SDL_IM_MODULE=fcitx
+export WAYLAND_DISPLAY=wayland-0
+
 
 # show git branch and repository name
 function parse_git_dirty {
@@ -150,4 +153,3 @@ export PATH="~/Software/bin:$PATH"
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 # how to use
 # cat arch.bashrc > ~/.bashrc
-
