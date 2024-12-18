@@ -19,6 +19,7 @@ function SysTray() {
             const menu = item.create_menu()
 
             return <button
+                className="tray"
                 tooltipMarkup={bind(item, "tooltipMarkup")}
                 onDestroy={() => menu?.destroy()}
                 onClickRelease={self => {
@@ -95,6 +96,7 @@ function Workspaces() {
 
     return <box className="Workspaces">
         {bind(hypr, "workspaces").as(wss => wss
+            .filter(({ id }) => id > 0)
             .sort((a, b) => a.id - b.id)
             .map(ws => (
                 <button
@@ -113,7 +115,7 @@ function FocusedClient() {
     const focused = bind(hypr, "focusedClient")
 
     return <box
-        className="Focused"
+        className="FocusedClient"
         visible={focused.as(Boolean)}>
         {focused.as(client => (
             client && <label label={bind(client, "title").as(String)} />
@@ -133,16 +135,16 @@ function Time({ format = "%H:%M - %A %e." }) {
 }
 
 export default function Bar(monitor: Gdk.Monitor) {
-    const anchor = Astal.WindowAnchor.TOP
-        | Astal.WindowAnchor.LEFT
-        | Astal.WindowAnchor.RIGHT
+    const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     return <window
         className="Bar"
         gdkmonitor={monitor}
+        margin-top={8}
+        margin-left={8}
+        margin-right={8}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        margin={[8, 8, 0, 8]}
-        anchor={anchor}>
+        anchor={TOP | LEFT | RIGHT}>
         <centerbox>
             <box hexpand halign={Gtk.Align.START}>
                 <Workspaces />
