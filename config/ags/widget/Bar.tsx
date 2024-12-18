@@ -7,6 +7,8 @@ import Battery from "gi://AstalBattery"
 import Wp from "gi://AstalWp"
 import Network from "gi://AstalNetwork"
 import Tray from "gi://AstalTray"
+import LanIPAddress from "./LanIPAddress"
+import Caffeine from "./Caffeine"
 
 function SysTray() {
     const tray = Tray.get_default()
@@ -19,7 +21,6 @@ function SysTray() {
             const menu = item.create_menu()
 
             return <button
-                className="tray"
                 tooltipMarkup={bind(item, "tooltipMarkup")}
                 onDestroy={() => menu?.destroy()}
                 onClickRelease={self => {
@@ -54,6 +55,14 @@ function AudioSlider() {
     </box>
 }
 
+function AudioLevel() {
+    const speaker = Wp.get_default()?.audio.defaultSpeaker!
+
+    return <box className="AudioLevel">
+        <icon icon={bind(speaker, "volumeIcon")} />
+    </box>
+}
+
 function BatteryLevel() {
     const bat = Battery.get_default()
 
@@ -61,7 +70,7 @@ function BatteryLevel() {
         visible={bind(bat, "isPresent")}>
         <icon icon={bind(bat, "batteryIconName")} />
         <label label={bind(bat, "percentage").as(p =>
-            `${Math.floor(p * 100)} %`
+            `${Math.floor(p * 100)}%`
         )} />
     </box>
 }
@@ -151,14 +160,16 @@ export default function Bar(monitor: Gdk.Monitor) {
                 <FocusedClient />
             </box>
             <box>
-                <Media />
+                <Time />
             </box>
             <box hexpand halign={Gtk.Align.END} >
+                <Media />
                 <SysTray />
                 <Wifi />
-                <AudioSlider />
+                <Caffeine/>
+                <LanIPAddress />
+                <AudioLevel />
                 <BatteryLevel />
-                <Time />
             </box>
         </centerbox>
     </window>

@@ -3,20 +3,22 @@ import style from "./style.scss"
 import Applauncher from "./widget/Applauncher"
 import Bar from "./widget/Bar"
 
+function main() {
+    for (const monitor of App.get_monitors()) {
+        if (monitor.model == "0x08DF") {
+            Bar(monitor)
+        }
+    }
+    Applauncher()
+}
+
 
 App.start({
     css: style,
-    instanceName: "js",
+    instanceName: "astal",
     requestHandler(request, res) {
-        print(request)
         res("ok")
     },
-    main: () => App.get_monitors().map(Bar),
+    icons: `${SRC}/assets/icons`,
+    main
 })
-
-
-// App.start({
-//     instanceName: "launcher",
-//     css: style,
-//     main: Applauncher,
-// })

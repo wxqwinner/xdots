@@ -11,7 +11,7 @@ window.Bar {
     background-color: $bg;
     border-radius: $radius;
     color: $fg;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: bold;
     opacity: 0.85;
     margin-top: 1rem;
@@ -30,10 +30,32 @@ window.Bar {
         }
     }
 
+    button {
+        all: unset;
+        background-color: transparent;
+
+        &:hover icon {
+            background-color: color.adjust($fg, $alpha: -0.84);
+            border-color: color.adjust($accent, $alpha: -0.8);
+        }
+
+        &:active icon {
+            background-color: color.adjust($fg, $alpha: -0.8)
+        }
+    }
+
     label {
         transition: 200ms;
         padding: 0 8px;
         margin: 2px;
+        border-radius: $radius;
+        border: 1pt solid transparent;
+    }
+
+    icon {
+        transition: 200ms;
+        padding: 0 5px;
+        margin: 0px;
         border-radius: $radius;
         border: 1pt solid transparent;
     }
@@ -45,7 +67,7 @@ window.Bar {
 
     .FocusedClient {
         // color: $accent;
-        color: rgba(189, 147, 249, 0.5)
+        color: #ff79c6
     }
 
     .Media .Cover {
@@ -91,6 +113,12 @@ window.Bar {
             min-height: 1em;
             min-width: 1em;
             margin: -.2em;
+        }
+    }
+
+    .AudioLevel {
+        * {
+            all: unset;
         }
     }
 }
