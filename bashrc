@@ -16,7 +16,6 @@ export GTK_IM_MODULE=fcitx
 export XIM=fcitx
 export EDITOR=/usr/bin/vim
 export SDL_IM_MODULE=fcitx
-export WAYLAND_DISPLAY=wayland-0
 
 
 # show git branch and repository name
