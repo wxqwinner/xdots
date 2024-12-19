@@ -102,7 +102,6 @@ function Media() {
 
 function Workspaces() {
     const hypr = Hyprland.get_default()
-
     return <box className="Workspaces">
         {bind(hypr, "workspaces").as(wss => wss
             .filter(({ id }) => id > 0)
@@ -160,14 +159,14 @@ export default function Bar(monitor: Gdk.Monitor) {
                 <FocusedClient />
             </box>
             <box>
-                <Time />
+                <Media />
             </box>
             <box hexpand halign={Gtk.Align.END} >
-                <Media />
                 <SysTray />
                 <Wifi />
                 <Caffeine/>
-                <LanIPAddress />
+                {/* <LanIPAddress /> */}
+                <Time />
                 <AudioLevel />
                 <BatteryLevel />
             </box>
