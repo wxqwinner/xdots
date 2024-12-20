@@ -119,17 +119,29 @@ function Workspaces() {
 }
 
 function FocusedClient() {
-    const hypr = Hyprland.get_default()
-    const focused = bind(hypr, "focusedClient")
+    const hypr = Hyprland.get_default();
+    const focused = bind(hypr, "focusedClient");
 
-    return <box
-        className="FocusedClient"
-        visible={focused.as(Boolean)}>
-        {focused.as(client => (
-            client && <label label={bind(client, "title").as(String)} />
-        ))}
-    </box>
+    return (
+        <box
+            className="FocusedClient"
+            visible={focused.as(Boolean)}
+        >
+            {focused.as(client => {
+                if (!client) return null;
+
+                const title = bind(client, "title").as(String).get(); // 获取绑定值
+                const truncatedTitle = title.length > 40
+                    ? title.substring(0, 40) + "..."
+                    : title;
+
+                return <label label={truncatedTitle} />;
+            })}
+        </box>
+    );
 }
+
+
 
 function Time({ format = "%H:%M - %A %e." }) {
     const time = Variable<string>("").poll(1000, () =>
