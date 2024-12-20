@@ -2,6 +2,7 @@ import { App } from "astal/gtk3"
 import style from "./style.scss"
 import Applauncher from "./widget/Applauncher"
 import Bar from "./widget/Bar"
+import Panel from "./widget/Panel"
 
 function main() {
     for (const monitor of App.get_monitors()) {
@@ -10,6 +11,7 @@ function main() {
         }
     }
     Applauncher()
+    Panel()
 }
 
 
