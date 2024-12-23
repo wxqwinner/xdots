@@ -76,49 +76,22 @@ window.Bar {
         background-position: center;
         background-size: contain;
     }
-
-    .Battery label {
-        padding-left: 0;
-        margin-left: 0;
-    }
-
-    .AudioSlider {
+    .Indicator {
         * {
             all: unset;
+            margin-left: 2px;
+        }
+
+        .Battery label {
+            padding-left: 0;
+            margin-left: 0;
         }
 
         icon {
-            margin-right: .6em;
+            padding-left: 1px;
+            margin-left: 1px;
         }
 
-        & {
-            margin: 0 1em;
-        }
-
-        trough {
-            background-color: color.adjust($fg, $alpha: -0.8);
-            border-radius: $radius;
-        }
-
-        highlight {
-            background-color: $accent;
-            min-height: .8em;
-            border-radius: $radius;
-        }
-
-        slider {
-            background-color: $fg;
-            border-radius: $radius;
-            min-height: 1em;
-            min-width: 1em;
-            margin: -.2em;
-        }
-    }
-
-    .AudioLevel {
-        * {
-            all: unset;
-        }
     }
 
     .Time {

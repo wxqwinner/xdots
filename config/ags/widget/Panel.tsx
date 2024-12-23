@@ -7,8 +7,8 @@ function hide() {
     App.get_window("panel")!.hide()
 }
 
-function AudioSlider() {
-    const speaker = Wp.get_default()?.audio.defaultSpeaker!
+function SpeakerSlider() {
+    const speaker = Wp.get_default()?.audio.default_speaker!
 
     return <box className="AudioSlider" css="min-width: 140px">
         <icon icon={bind(speaker, "volumeIcon")} />
@@ -20,8 +20,22 @@ function AudioSlider() {
     </box>
 }
 
+function microphoneSlider() {
+    const microphone = Wp.get_default()?.audio.default_microphone!
+
+    return <box className="AudioSlider" css="min-width: 140px">
+        <icon icon={"microphone_30"} />
+        <slider
+            hexpand
+            onDragged={({ value }) => microphone.volume = value}
+            value={bind(microphone, "volume")}
+        />
+    </box>
+}
+
 export default function Panel() {
-    const slider = new AudioSlider()
+    const speaker_slider = new SpeakerSlider()
+    const microphone_slider = new microphoneSlider()
     const text = Variable("")
 
     return <window
@@ -44,7 +58,8 @@ export default function Panel() {
                         <eventbox heightRequest={50} onClick={hide} />
                         <box widthRequest={400} className="Panel" vertical>
                             <label label="No match found" />
-                            {slider}
+                            {microphone_slider}
+                            {speaker_slider}
                         </box>
                         <eventbox expand onClick={hide} />
                     </box>

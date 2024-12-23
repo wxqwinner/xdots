@@ -274,16 +274,16 @@ fi
 if [[ $(hyprctl clients -j | jq -r ".[] | select(.class==\"$CLASS\" and .workspace.id!=$ACTIVE_WORKSPACE)") ]]; then
   if [[ $FOCUS == false ]]; then
     # shellcheck disable=SC2140 # erroneous warning
-    hyprctl dispatch -- movetoworkspacesilent "$ACTIVE_WORKSPACE","^$CLASS$" || notify "hdrop: Error moving '$COMMANDLINE' to current workspace"
+    hyprctl dispatch -- movetoworkspacesilent "$ACTIVE_WORKSPACE","class:^$CLASS$" || notify "hdrop: Error moving '$COMMANDLINE' to current workspace"
     if $VERBOSE; then notify_low "hdrop: Matched class '$CLASS' on another workspace and moved it to current workspace"; fi
   fi
-  hyprctl dispatch -- focuswindow "^$CLASS$" || notify "hdrop: Error focusing '$COMMANDLINE' on current workspace"
+  hyprctl dispatch -- focuswindow "class:^$CLASS$" || notify "hdrop: Error focusing '$COMMANDLINE' on current workspace"
 elif [[ $(hyprctl clients -j | jq -r ".[] | select(.class==\"$CLASS\" and .workspace.id==$ACTIVE_WORKSPACE)") ]]; then
   if [[ $FOCUS == false ]]; then
-    hyprctl dispatch -- movetoworkspacesilent special:hdrop,"^$CLASS$" || notify "hdrop: Error moving '$COMMANDLINE' to workspace 'special:hdrop'"
+    hyprctl dispatch -- movetoworkspacesilent special:hdrop,"class:^$CLASS$" || notify "hdrop: Error moving '$COMMANDLINE' to workspace 'special:hdrop'"
     if $VERBOSE; then notify_low "hdrop: Matched class '$CLASS' on current workspace and moved it to workspace 'special:hdrop'"; fi
   else
-    hyprctl dispatch -- focuswindow "^$CLASS$" || notify "hdrop: Error focusing '$COMMANDLINE' on current workspace"
+    hyprctl dispatch -- focuswindow "class:^$CLASS$" || notify "hdrop: Error focusing '$COMMANDLINE' on current workspace"
   fi
 else
   # 'foot' always throws an error when its window is closed. Thus we disable the notification.

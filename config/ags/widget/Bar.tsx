@@ -13,22 +13,16 @@ import Caffeine from "./Caffeine"
 function SysTray() {
     const tray = Tray.get_default()
 
-    return <box>
-        {bind(tray, "items").as(items => items.map(item => {
-            if (item.iconThemePath)
-                App.add_icons(item.iconThemePath)
-
-            const menu = item.create_menu()
-
-            return <button
+    return <box className="SysTray">
+        {bind(tray, "items").as(items => items.map(item => (
+            <menubutton
                 tooltipMarkup={bind(item, "tooltipMarkup")}
-                onDestroy={() => menu?.destroy()}
-                onClickRelease={self => {
-                    menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
-                }}>
+                usePopover={false}
+                actionGroup={bind(item, "action-group").as(ag => ["dbusmenu", ag])}
+                menuModel={bind(item, "menu-model")}>
                 <icon gIcon={bind(item, "gicon")} />
-            </button>
-        }))}
+            </menubutton>
+        )))}
     </box>
 }
 
@@ -42,32 +36,24 @@ function Wifi() {
     />
 }
 
-function AudioSlider() {
-    const speaker = Wp.get_default()?.audio.defaultSpeaker!
+function SpeakerLevel() {
+    const speaker = Wp.get_default()?.audio.default_speaker!
 
-    return <box className="AudioSlider" css="min-width: 140px">
-        <icon icon={bind(speaker, "volumeIcon")} />
-        <slider
-            hexpand
-            onDragged={({ value }) => speaker.volume = value}
-            value={bind(speaker, "volume")}
-        />
-    </box>
+    return <icon icon={bind(speaker, "volumeIcon")} />
+
 }
 
-function AudioLevel() {
-    const speaker = Wp.get_default()?.audio.defaultSpeaker!
+function MicrophoneLevel() {
+    const microphone = Wp.get_default()?.audio.default_microphone!
 
-    return <box className="AudioLevel">
-        <icon icon={bind(speaker, "volumeIcon")} />
-    </box>
+    return <icon icon={"microphone_30"} />
+
 }
 
 function BatteryLevel() {
     const bat = Battery.get_default()
 
-    return <box className="Battery"
-        visible={bind(bat, "isPresent")}>
+    return <box visible={bind(bat, "isPresent")}>
         <icon icon={bind(bat, "batteryIconName")} />
         <label label={bind(bat, "percentage").as(p =>
             `${Math.floor(p * 100)}%`
@@ -154,6 +140,19 @@ function Time({ format = "%H:%M - %A %e." }) {
     />
 }
 
+
+function Indicator() {
+    return <box className="Indicator">
+        <button onClicked={() => {App.toggle_window('panel')}}>
+            <box>
+                {<MicrophoneLevel />}
+                {<SpeakerLevel />}
+                {<BatteryLevel />}
+            </box>
+        </button>
+    </box>
+}
+
 export default function Bar(monitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
@@ -171,16 +170,16 @@ export default function Bar(monitor: Gdk.Monitor) {
                 <FocusedClient />
             </box>
             <box>
-                <Media />
+                <Time />
             </box>
             <box hexpand halign={Gtk.Align.END} >
+            <Media />
                 <SysTray />
                 <Wifi />
                 <Caffeine/>
                 {/* <LanIPAddress /> */}
-                <Time />
-                <AudioLevel />
-                <BatteryLevel />
+                <Indicator />
+
             </box>
         </centerbox>
     </window>
