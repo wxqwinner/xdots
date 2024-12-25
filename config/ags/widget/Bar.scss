@@ -6,7 +6,7 @@ $accent: #378DF7;
 $radius: 15px;
 
 window.Bar {
-    border: none;
+    border: 1pt solid #bd93f9;
     box-shadow: none;
     background-color: $bg;
     border-radius: $radius;
@@ -66,7 +66,7 @@ window.Bar {
 
     .FocusedClient {
         // color: $accent;
-        color: #ff79c6
+        color: #ff79c6;
     }
 
     .Media .Cover {

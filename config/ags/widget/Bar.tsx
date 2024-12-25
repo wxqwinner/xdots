@@ -159,9 +159,9 @@ export default function Bar(monitor: Gdk.Monitor) {
     return <window
         className="Bar"
         gdkmonitor={monitor}
-        margin-top={8}
-        margin-left={8}
-        margin-right={8}
+        margin-top={4}
+        margin-left={4}
+        margin-right={4}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}>
         <centerbox>
