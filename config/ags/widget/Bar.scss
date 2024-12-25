@@ -79,23 +79,35 @@ window.Bar {
     .Indicator {
         * {
             all: unset;
-            margin-left: 2px;
         }
 
-        .Battery label {
-            padding-left: 0;
-            margin-left: 0;
+        .LeftIcon {
+                transition: 200ms;
+                padding-left: 5px;
+                border-radius: $radius 0  0 $radius;
+                border: 1pt solid transparent;
         }
 
-        icon {
-            padding-left: 1px;
-            margin-left: 1px;
+        .MiddleIcon {
+            padding: 10px;
+            transition: 200ms;
+            border: 1pt solid transparent;
         }
 
+        .RightIcon {
+                transition: 200ms;
+                padding-right: 5px;
+                border-radius:  0 $radius $radius 0;
+                border: 1pt solid transparent;
+        }
     }
 
     .Time {
+        * {
+            all: unset;
+        }
         color: #f8f8f2;
         min-height: 30px;
+        min-width: 100px;
     }
 }

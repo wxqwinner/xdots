@@ -55,9 +55,9 @@ function BatteryLevel() {
 
     return <box visible={bind(bat, "isPresent")}>
         <icon icon={bind(bat, "batteryIconName")} />
-        <label label={bind(bat, "percentage").as(p =>
+        {/* <label label={bind(bat, "percentage").as(p =>
             `${Math.floor(p * 100)}%`
-        )} />
+        )} /> */}
     </box>
 }
 
@@ -129,7 +129,7 @@ function FocusedClient() {
 
 
 
-function Time({ format = "%H:%M - %A %e." }) {
+function Time({ format = "%a. %e %H:%M " }) {
     const time = Variable<string>("").poll(1000, () =>
         GLib.DateTime.new_now_local().format(format)!)
 
@@ -141,13 +141,13 @@ function Time({ format = "%H:%M - %A %e." }) {
 }
 
 
-function Indicator() {
+function Menu() {
     return <box className="Indicator">
         <button onClicked={() => {App.toggle_window('panel')}}>
             <box>
-                {<MicrophoneLevel />}
-                {<SpeakerLevel />}
-                {<BatteryLevel />}
+            <icon className="LeftIcon" icon={"search"} />
+            <icon className="MiddleIcon" icon={"chatgpt"} />
+            <icon className="RightIcon" icon={"menu"} />
             </box>
         </button>
     </box>
@@ -170,16 +170,18 @@ export default function Bar(monitor: Gdk.Monitor) {
                 <FocusedClient />
             </box>
             <box>
-                <Time />
+                <Media />
             </box>
             <box hexpand halign={Gtk.Align.END} >
-            <Media />
                 <SysTray />
                 <Wifi />
                 <Caffeine/>
                 {/* <LanIPAddress /> */}
-                <Indicator />
-
+                <MicrophoneLevel />
+                <SpeakerLevel />
+                <BatteryLevel />
+                <Time />
+                <Menu />
             </box>
         </centerbox>
     </window>
