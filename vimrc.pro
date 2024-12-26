@@ -1,19 +1,25 @@
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 call plug#begin('~/.vim/plugged')
-    Plug 'dracula/vim', { 'as': 'dracula' } " 主题
-    Plug 'lilydjwg/fcitx.vim' " fcitx5输入法兼容
-    Plug 'vim-airline/vim-airline'      " 状态栏
-    Plug 'luochen1990/rainbow'          " 彩虹括号
-    Plug 'preservim/nerdtree'           " 文件树
-    Plug 'psliwka/vim-smoothie'         " 动态滚动
-    Plug 'jiangmiao/auto-pairs'         " 自动补全括号
-    Plug 'preservim/nerdcommenter'      " 代码注释
-    Plug 'junegunn/vim-easy-align'      " 文本对齐
-    Plug 'ctrlpvim/ctrlp.vim'           " 文件/目录模糊搜索
-    Plug 'preservim/tagbar'             " 查看标签
-    Plug 'ludovicchabant/vim-gutentags' " 自动生成tags文件
-    Plug 'voldikss/vim-floaterm'        " float terminal
+    Plug 'dracula/vim', { 'as': 'dracula' } " theme
+    Plug 'lilydjwg/fcitx.vim'               " fcitx5
+    Plug 'vim-autoformat/vim-autoformat'    " format
+    Plug 'vim-airline/vim-airline'          " status bar
+    Plug 'tpope/vim-fugitive'               " git
+    Plug 'preservim/nerdtree'               " file explorer
+    Plug 'ctrlpvim/ctrlp.vim'               " fuzzy search
+    Plug 'voldikss/vim-floaterm'            " float terminal
+    Plug 'puremourning/vimspector'          " debug
+
+    Plug 'luochen1990/rainbow'              " 彩虹括号
+    Plug 'psliwka/vim-smoothie'             " 动态滚动
+    Plug 'jiangmiao/auto-pairs'             " 自动补全括号
+    Plug 'preservim/nerdcommenter'          " 代码注释
+    Plug 'junegunn/vim-easy-align'          " 文本对齐
+
+    Plug 'preservim/tagbar'                 " 查看标签
+    Plug 'ludovicchabant/vim-gutentags'     " 自动生成tags文件
+
 call plug#end()
 
 colorscheme dracula
@@ -39,7 +45,7 @@ let g:rainbow_active = 1
 
 " Plug 'preservim/nerdtree'
 let NERDTreeShowHidden = 1      "显示隐藏文件
-map <Leader>e :NERDTreeToggle<CR>
+"map <Leader>e :NERDTreeToggle<CR>
 
 " Plug 'preservim/nerdcommenter'
 let NERDSpaceDelims = 1
@@ -61,5 +67,8 @@ let g:gutentags_cache_dir = "~/.cache/tags"
 let g:gutentags_modules = ['ctags']
 
 " float terminal
-"nnoremap <Leader>/ :FloatermToggle<CR>
-"tnoremap <Leader>/ <C-\><C-n>:FloatermToggle<CR>"
+nnoremap <silent> <Leader>/ :FloatermToggle<CR>
+""tnoremap <silent> <Leader>/ <C-\><C-n>:FloatermToggle<CR>"
+
+" update plug and reload vim
+nnoremap <leader>r :call system('proxyon')<cr>:PlugUpdate<cr>:source $MYVIMRC<cr>:call system('proxyoff>')<cr>
