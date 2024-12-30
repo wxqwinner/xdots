@@ -1,3 +1,8 @@
 .bak
 config/thunar/accels.scm
 config/thunar/renamerrc
+
+# py
+__pycache__/
+*.py[cod]
+*$py.class
