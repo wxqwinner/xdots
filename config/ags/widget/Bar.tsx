@@ -163,6 +163,7 @@ export default function Bar(monitor: Gdk.Monitor) {
         margin-left={4}
         margin-right={4}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
+        layer={Astal.Layer.BOTTOM}
         anchor={TOP | LEFT | RIGHT}>
         <centerbox>
             <box hexpand halign={Gtk.Align.START}>
