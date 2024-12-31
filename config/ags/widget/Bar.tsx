@@ -76,7 +76,7 @@ function Media() {
                 />
                 <label
                     label={bind(ps[0], "title").as(() =>
-                        `${ps[0].title} - ${ps[0].artist}`
+                        `${ps[0].title.substring(0, Math.min(60, ps[0].title.length))} - ${ps[0].artist}`
                     )}
                 />
             </box>
@@ -116,7 +116,7 @@ function FocusedClient() {
             {focused.as(client => {
                 if (!client) return null;
 
-                const title = bind(client, "title").as(String).get(); // 获取绑定值
+                const title = bind(client, "title").as(String).get();
                 const truncatedTitle = title.length > 40
                     ? title.substring(0, 40) + "..."
                     : title;
