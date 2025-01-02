@@ -55,7 +55,7 @@ nnoremap <leader><leader>r :source $MYVIMRC<cr>
 nnoremap <leader><leader>p "+p
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 
-nmap <leader>l :call CycleLineNumbers()<CR>
+nmap <leader><leader>l :call CycleLineNumbers()<CR>
 function! CycleLineNumbers()
     if (&number == 1 && &relativenumber == 0)
         set relativenumber
