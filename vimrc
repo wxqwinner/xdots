@@ -32,7 +32,6 @@ let g:netrw_showhide=1
 let g:netrw_winsize=20
 
 "---------------keybinds------------
-inoremap jj <Esc>
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 nmap <leader>w :w!<cr>
@@ -50,73 +49,74 @@ map <Leader>l <c-w>l
 
 vmap <leader><leader>y "+y
 
+" reload vim
+nnoremap <leader><leader>r :source $MYVIMRC<cr>
+
 nnoremap <leader><leader>p "+p
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 
 nmap <leader>l :call CycleLineNumbers()<CR>
 function! CycleLineNumbers()
-  if (&number == 1 && &relativenumber == 0)
-    set relativenumber
-  else
-    set number
-    set norelativenumber
-  endif
+    if (&number == 1 && &relativenumber == 0)
+        set relativenumber
+    else
+        set number
+        set norelativenumber
+    endif
 endfunc
 
 "----------------comment----------------
 let g:py_header_comment = [
-    \ '"""',
-    \ '%DESC%.',
-    \ '',
-    \ '@history',
-    \ ' %DATE% %AUTHOR% Created.',
-    \ '',
-    \ 'Copyright (c) %YEAR%~ %AUTHOR%.',
-    \ '"""',
-    \'',
-    \''
-    \]
+            \ '"""',
+            \ '%DESC%.',
+            \ '',
+            \ '@history',
+            \ ' %DATE% %AUTHOR% Created.',
+            \ '',
+            \ 'Copyright (c) %YEAR%~ %AUTHOR%.',
+            \ '"""',
+            \'',
+            \''
+            \]
 
 let g:c_header_comment = [
-    \ '/**',
-    \ ' * %DESC%.',
-    \ ' *',
-    \ ' * @history',
-    \ ' *  %DATE% %AUTHOR% created.',
-    \ ' *',
-    \ ' * Copyright (c) %YEAR%~ %AUTHOR%',
-    \ ' */',
-    \ '',
-    \ ''
-    \]
+            \ '/**',
+            \ ' * %DESC%.',
+            \ ' *',
+            \ ' * @history',
+            \ ' *  %DATE% %AUTHOR% created.',
+            \ ' *',
+            \ ' * Copyright (c) %YEAR%~ %AUTHOR%',
+            \ ' */',
+            \ '',
+            \ ''
+            \]
 
 let g:py_function_comment = [
-    \ '"""%DESC%',
-    \ '',
-    \ 'Args',
-    \ '    name <type> (shape) [io] desc.',
-    \ '    name <type> (shape) [io] desc (0, 10].',
-    \ '    name <type> (shape) [io] desc {value: desc, value: desc}.',
-    \ '',
-    \ 'Returns',
-    \ '    <type>: desc',
-    \ '"""',
-    \ ''
-    \]
+            \ '"""%DESC%',
+            \ '',
+            \ 'Args',
+            \ '    name <type> (shape) [io] desc.',
+            \ '    name <type> (shape) [io] desc (0, 10].',
+            \ '    name <type> (shape) [io] desc {value: desc, value: desc}.',
+            \ '',
+            \ 'Returns',
+            \ '    <type>: desc',
+            \ '"""',
+            \ ''
+            \]
 
 let g:c_function_comment = [
-    \ '/**',
-    \ ' * %DESC%.',
-    \ ' *',
-    \ ' * @param name <type> (shape) [io] desc.',
-    \ ' * @param name <type> (shape) [io] desc (0, 10].',
-    \ ' * @param name <type> (shape) [io] desc {value: desc, value: desc}.',
-    \ ' * @return <type> desc.',
-    \ ' */',
-    \ ''
-    \]
-
-
+            \ '/**',
+            \ ' * %DESC%.',
+            \ ' *',
+            \ ' * @param name <type> (shape) [io] desc.',
+            \ ' * @param name <type> (shape) [io] desc (0, 10].',
+            \ ' * @param name <type> (shape) [io] desc {value: desc, value: desc}.',
+            \ ' * @return <type> desc.',
+            \ ' */',
+            \ ''
+            \]
 
 function! GetHeaderCommentTemplate()
     if &filetype == 'python'
@@ -182,6 +182,51 @@ endfunction
 
 autocmd FileType * nnoremap <Leader><Leader>h :call InsertHeaderComment()<ESC>
 autocmd FileType * nnoremap <Leader><Leader>i :call InsertFunctionComment()<ESC>
+
+"----------------fold-----------------
+set foldenable
+set foldmethod=indent
+set foldlevel=99
+let g:FoldMethod = 0
+map <leader>zz :call ToggleFold()<cr>
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe "normal! zM"
+        let g:FoldMethod = 1
+    else
+        exe "normal! zR"
+        let g:FoldMethod = 0
+    endif
+endfun
+
+"----------------fcitx----------------
+if exists('g:fcitx_auto')
+    finish
+endif
+let g:fcitx_auto = 1
+let s:r_status = 1
+let s:f_status = system("fcitx-remote")
+let s:cmd = s:f_status == 1 || s:f_status == 2 ? "fcitx-remote" : "fcitx5-remote"
+
+function s:fcitx2en()
+    let l:lang = system(s:cmd)
+    if l:lang == 2
+        call system(printf("%s -c", s:cmd))
+        let s:r_status = 2
+    else
+        let s:r_status = 1
+    endif
+endfunction
+
+function s:fcitx2back()
+    if s:r_status == 1
+        call system(printf("%s -c", s:cmd))
+    else
+        call system(printf("%s -o", s:cmd))
+    endif
+endfunction
+autocmd InsertLeave * call <SID>fcitx2en()
+autocmd InsertEnter * call <SID>fcitx2back()
 
 "----------------pro----------------
 if filereadable(expand($HOME . '/.vimrc.pro'))
