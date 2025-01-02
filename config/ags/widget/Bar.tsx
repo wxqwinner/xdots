@@ -129,7 +129,7 @@ function FocusedClient() {
 
 
 
-function Time({ format = "%a. %e %H:%M " }) {
+function Time({ format = "%a. %e-%h %H:%M " }) {
     const time = Variable<string>("").poll(1000, () =>
         GLib.DateTime.new_now_local().format(format)!)
 
