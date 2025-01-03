@@ -6,9 +6,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdcommenter'          " code comment
     Plug 'vim-airline/vim-airline'          " status bar
     Plug 'tpope/vim-fugitive'               " git
-    Plug 'airblade/vim-gitgutter'           " git
     Plug 'ctrlpvim/ctrlp.vim'               " fuzzy search
-    Plug 'voldikss/vim-floaterm'            " float terminal
     Plug 'preservim/tagbar'                 " show tag bar
     Plug 'ludovicchabant/vim-gutentags'     " auto generate tags
     Plug 'luochen1990/rainbow'              " rainbow
@@ -31,6 +29,9 @@ let g:NERDCreateDefaultMappings = 1
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
+
+nnoremap <Leader>/ <Plug>NERDCommenterToggle
+vnoremap <Leader>/ <Plug><C-u>NERDCommenterToggle
 
 " vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -62,13 +63,6 @@ map <leader>m :TagbarToggle<CR>
 " ludovicchabant/vim-gutentags
 let g:gutentags_cache_dir = "~/.cache/tags"
 let g:gutentags_modules = ['ctags']
-
-" airblade/vim-gitgutter"
-set updatetime=100
-
-" float terminal
-nnoremap <silent> <Leader>/ :FloatermToggle<CR>
-""tnoremap <silent> <Leader>/ <C-\><C-n>:FloatermToggle<CR>"
 
 " tpope/vim-fugitive
 nnoremap <leader>gs :Git status<CR>

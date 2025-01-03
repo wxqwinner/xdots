@@ -42,17 +42,19 @@ map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
 
-map <Leader>j <c-w>j
-map <Leader>k <c-w>k
-map <Leader>h <c-w>h
-map <Leader>l <c-w>l
+map <leader>h ^
+map <leader>l $
+map <leader>k <C-U>
+map <leader>j <C-D>
 
-vmap <leader><leader>y "+y
+map <leader>t :terminal<CR><C-W>J<C-W>10-
+
+vmap <leader>y "+y
 
 " reload vim
-nnoremap <leader><leader>r :source $MYVIMRC<cr>
+nnoremap <leader>r :source $MYVIMRC<cr>
 
-nnoremap <leader><leader>p "+p
+nnoremap <leader>p "+p
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 
 nmap <leader><leader>l :call CycleLineNumbers()<CR>
@@ -148,7 +150,7 @@ function! InsertHeaderComment()
     let author = $USER
     let date = strftime('%Y-%m-%d')
     let year = strftime('%Y')
-    let desc = input('header desc: ')
+    let desc = input('Header description: ')
 
     let template = substitute(join(template, "\n"), '%DESC%', desc, 'g')
     let template = substitute(template, '%AUTHOR%', author, 'g')
@@ -180,8 +182,8 @@ function! InsertFunctionComment()
     endif
 endfunction
 
-autocmd FileType * nnoremap <Leader><Leader>h :call InsertHeaderComment()<ESC>
-autocmd FileType * nnoremap <Leader><Leader>i :call InsertFunctionComment()<ESC>
+autocmd FileType * nnoremap <Esc><C-h> :call InsertHeaderComment()<ESC>
+autocmd FileType * nnoremap <Esc><C-i> :call InsertFunctionComment()<ESC>
 
 "----------------fold-----------------
 set foldenable
