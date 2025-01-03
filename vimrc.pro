@@ -10,8 +10,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/tagbar'                 " show tag bar
     Plug 'ludovicchabant/vim-gutentags'     " auto generate tags
     Plug 'luochen1990/rainbow'              " rainbow
-    Plug 'puremourning/vimspector'          " debug
     Plug 'tpope/vim-repeat'                 " repeat
+    Plug 'puremourning/vimspector'          " debug
 call plug#end()
 
 " dracula/vim
@@ -67,3 +67,6 @@ let g:gutentags_modules = ['ctags']
 " tpope/vim-fugitive
 nnoremap <leader>gs :Git status<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
+
+" puremourning/vimspector
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
