@@ -12,6 +12,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow'              " rainbow
     Plug 'tpope/vim-repeat'                 " repeat
     Plug 'puremourning/vimspector'          " debug
+    Plug 'pakutoma/toggle-terminal'
+    Plug 'hahdookin/miniterm.vim'
 call plug#end()
 
 " dracula/vim
@@ -37,6 +39,7 @@ vnoremap <Leader>/ <Plug><C-u>NERDCommenterToggle
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#formatter = 'default'
+set laststatus=2
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -68,5 +71,31 @@ let g:gutentags_modules = ['ctags']
 nnoremap <leader>gs :Git status<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
 
+" Toggle :Git window
+fun! ToggleGitWindow()
+    for win in getwininfo()
+        if getbufvar(win.bufnr, '&filetype') == "fugitive"
+            call win_execute(win.winid, "close")
+            return
+        endif
+    endfor
+    Git
+endfun
+
+nnoremap <silent><leader>gg :call ToggleGitWindow()<CR>
+nnoremap <silent><leader>gG :tab Git<CR>
+
 " puremourning/vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+
+" map <C-@> to toggle
+tnoremap <silent> <Esc>t <C-w>:ToggleTerminal<CR>
+nnoremap <silent> <Esc>t :ToggleTerminal<CR>
+
+" set your favorite shell
+let g:toggle_terminal#command = 'bash'
+
+" set terminal window position
+" (see possible options at :help vertical)
+let g:toggle_terminal#position = 'below'

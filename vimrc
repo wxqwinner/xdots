@@ -26,6 +26,18 @@ set ttimeoutlen=0
 set autoread
 au FocusGained,BufEnter * silent! checktime
 
+function! SetColorColumn()
+    if &filetype =~# '\v^(c|cpp|h|python)$'
+        set colorcolumn=80,120
+    else
+        set colorcolumn=
+    endif
+endfunction
+
+autocmd BufEnter * call SetColorColumn()
+autocmd FileType * call SetColorColumn()
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
 let g:netrw_banner=0
 let g:netrw_liststyle=3
 let g:netrw_showhide=1
@@ -47,7 +59,26 @@ map <leader>l $
 map <leader>k <C-U>
 map <leader>j <C-D>
 
-map <leader>t :terminal<CR><C-W>J<C-W>10-
+map <Esc>h <c-w>h
+map <Esc>j <c-w>j
+map <Esc>k <c-w>k
+map <Esc>l <c-w>l
+
+tnoremap <Esc>h <C-w>h
+tnoremap <Esc>j <C-w>j
+tnoremap <Esc>k <C-w>k
+tnoremap <Esc>l <C-w>l
+
+"map <Esc>t :terminal<CR><C-W>J<C-W>10-
+
+"nnoremap <silent> <Esc>t :call ToggleTerminal()<CR>
+"tnoremap <Esc>t <C-\><C-n>:call ToggleTerminal()<CR>
+
+nnoremap <Esc>x :close<CR>
+inoremap <Esc>x <Esc>:close<CR>
+
+tnoremap <Esc>x <C-\><C-n>:close!<CR>
+
 
 vmap <leader>y "+y
 
