@@ -68,8 +68,11 @@ tnoremap <Esc>h <C-w>h
 tnoremap <Esc>j <C-w>j
 tnoremap <Esc>k <C-w>k
 tnoremap <Esc>l <C-w>l
+" 
+inoremap jj <Esc>:w<CR>
 
 "map <Esc>t :terminal<CR><C-W>J<C-W>10-
+" todo alt+n next or create, alt+t toggle, alt+p prev
 let g:toggle_terminal_command = 'bash'
 let g:toggle_terminal_position = 'below'
 function! ToggleTerminal()
