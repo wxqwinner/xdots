@@ -70,16 +70,31 @@ tnoremap <Esc>k <C-w>k
 tnoremap <Esc>l <C-w>l
 
 "map <Esc>t :terminal<CR><C-W>J<C-W>10-
+let g:toggle_terminal_command = 'bash'
+let g:toggle_terminal_position = 'below'
+function! ToggleTerminal()
+    let bufferNum = bufnr('ToggleTerminal')
+    if bufferNum == -1 || bufloaded(bufferNum) != 1
+        execute g:toggle_terminal_position.' term ++close ++kill=term '.g:toggle_terminal_command
+        file ToggleTerminal
+    else
+        let windowNum = bufwinnr(bufferNum)
+        if windowNum == -1
+            execute g:toggle_terminal_position.' sbuffer '.bufferNum
+        else
+            execute windowNum.'wincmd w'
+            hide
+        endif
+    endif
+endfunction
 
-"nnoremap <silent> <Esc>t :call ToggleTerminal()<CR>
-"tnoremap <Esc>t <C-\><C-n>:call ToggleTerminal()<CR>
+nnoremap <silent> <Esc>t :call ToggleTerminal()<CR>
+tnoremap <silent> <Esc>t <C-w>:call ToggleTerminal()<CR>
 
 nnoremap <Esc>x :close<CR>
 inoremap <Esc>x <Esc>:close<CR>
 
 tnoremap <Esc>x <C-\><C-n>:close!<CR>
-
-
 vmap <leader>y "+y
 
 " reload vim

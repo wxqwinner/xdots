@@ -12,8 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow'              " rainbow
     Plug 'tpope/vim-repeat'                 " repeat
     Plug 'puremourning/vimspector'          " debug
-    Plug 'pakutoma/toggle-terminal'
-    Plug 'hahdookin/miniterm.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} " lsp
 call plug#end()
 
 " dracula/vim
@@ -87,15 +86,3 @@ nnoremap <silent><leader>gG :tab Git<CR>
 
 " puremourning/vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
-
-
-" map <C-@> to toggle
-tnoremap <silent> <Esc>t <C-w>:ToggleTerminal<CR>
-nnoremap <silent> <Esc>t :ToggleTerminal<CR>
-
-" set your favorite shell
-let g:toggle_terminal#command = 'bash'
-
-" set terminal window position
-" (see possible options at :help vertical)
-let g:toggle_terminal#position = 'below'
