@@ -18,22 +18,28 @@ function SysTray() {
             <menubutton
                 tooltipMarkup={bind(item, "tooltipMarkup")}
                 usePopover={false}
-                actionGroup={bind(item, "action-group").as(ag => ["dbusmenu", ag])}
-                menuModel={bind(item, "menu-model")}>
-                <icon gIcon={bind(item, "gicon")} />
+                actionGroup={bind(item, "actionGroup").as(ag => ["dbusmenu", ag])}
+                menuModel={bind(item, "menuModel")}>
+                <icon gicon={bind(item, "gicon")} />
             </menubutton>
         )))}
     </box>
 }
 
 function Wifi() {
-    const { wifi } = Network.get_default()
+    const network = Network.get_default()
+    const wifi = bind(network, "wifi")
 
-    return <icon
-        tooltipText={bind(wifi, "ssid").as(String)}
-        className="Wifi"
-        icon={bind(wifi, "iconName")}
-    />
+    return <box visible={wifi.as(Boolean)}>
+        {wifi.as(wifi => wifi && (
+            <icon
+                tooltipText={bind(wifi, "ssid").as(String)}
+                className="Wifi"
+                icon={bind(wifi, "iconName")}
+            />
+        ))}
+    </box>
+
 }
 
 function SpeakerLevel() {
@@ -126,8 +132,6 @@ function FocusedClient() {
         </box>
     );
 }
-
-
 
 function Time({ format = "%a. %e-%h %H:%M " }) {
     const time = Variable<string>("").poll(1000, () =>
