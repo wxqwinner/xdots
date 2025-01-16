@@ -38,16 +38,10 @@ autocmd BufEnter * call SetColorColumn()
 autocmd FileType * call SetColorColumn()
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
-let g:netrw_banner=0
-let g:netrw_liststyle=3
-let g:netrw_showhide=1
-let g:netrw_winsize=20
-
 "---------------keybinds------------
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 nmap <leader>w :w!<cr>
-map <leader>e :Lex<CR>
 
 map <Left> <Nop>
 map <Right> <Nop>
