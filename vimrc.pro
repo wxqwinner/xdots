@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdcommenter'          " code comment
     Plug 'vim-airline/vim-airline'          " status bar
     Plug 'tpope/vim-fugitive'               " git
-    Plug 'ctrlpvim/ctrlp.vim'               " fuzzy search
+    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }               " fuzzy search
     Plug 'preservim/tagbar'                 " show tag bar
     Plug 'ludovicchabant/vim-gutentags'     " auto generate tags
     Plug 'luochen1990/rainbow'              " rainbow
@@ -61,8 +61,19 @@ nmap <S-Tab> <Plug>AirlineSelectPrevTab
 " luochen1990/rainbow
 let g:rainbow_active = 1
 
-" ctrlpvim/ctrlp.vim
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']     " 忽略.gitignore中的文件
+" Yggdroot/LeaderF
+let g:Lf_WindowPosition = 'popup'
+nnoremap <C-F> :Leaderf rg<CR>
+
+let g:Lf_ShortcutF = "<leader>ff"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+"noremap <Leader>f :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+let g:Lf_IgnoreFiles = '\v[\/]\.(git|hg|svn|cache)$'
+let g:Lf_DirCacheExcludePattern = '[/\\]?(\\.git|\.hg|\.svn|__pycache__)$'
 
 " preservim/tagbar
 map <leader>m :TagbarToggle<CR>
