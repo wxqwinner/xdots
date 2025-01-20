@@ -1,7 +1,7 @@
 #!/bin/bash
 
-pids=$(ps aux | grep "[h]yprlock" | awk '{print $2}')
-ps aux | grep "[h]yprlock"
+pids=$(ps aux | grep "/usr/bin/hyprlock" | awk '{print $2}')
+
 if [ -z "$pids" ]; then
   echo "No hyprlock processes found."
 else
