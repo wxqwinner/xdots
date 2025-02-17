@@ -28,6 +28,7 @@ au BufWrite * :Autoformat
 
 " preservim/nerdtree
 let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['^\.git$', '^node_modules$', '^\.cache$', '^\.vscode$', '^__pycache__$', '^build.*', '^legacy$', '^data$']
 map <Leader>e :NERDTreeToggle<CR>
 
 " preservim/nerdcommenter
