@@ -174,3 +174,85 @@ endfunction
 nnoremap <silent> <Esc>t :call ToggleTerminal()<CR>
 tnoremap <silent> <Esc>t <C-w>:call ToggleTerminal()<CR>
 tnoremap <Esc>x <C-\><C-n>:bdelete!<CR>
+
+
+let g:project_manager_dir = expand('~/.vim/sessions')
+let g:project_manager_projects = {}
+let g:project_manager_config = expand('~/.vim/projects.json')
+
+if !isdirectory(g:project_manager_dir)
+    call mkdir(g:project_manager_dir, 'p')
+endif
+
+if filereadable(g:project_manager_config)
+    let g:project_manager_projects = json_decode(join(readfile(g:project_manager_config)))
+endif
+
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,terminal,localoptions
+
+function! s:SaveProject(name) abort
+    let l:session_file = printf('%s/%s.session', g:project_manager_dir, substitute(a:name, '\s', '_', 'g'))
+
+    if exists(':NERDTreeClose') && exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+        NERDTreeClose
+    endif
+
+    execute 'mksession!' l:session_file
+
+    let g:project_manager_projects[a:name] = {
+                \ 'path': getcwd(),
+                \ 'session': l:session_file,
+                \ 'timestamp': strftime('%Y-%m-%d %H:%M:%S')
+                \ }
+
+    call writefile([json_encode(g:project_manager_projects)], g:project_manager_config)
+    echo 'Project saved:' a:name
+endfunction
+
+function! s:SwitchProject() abort
+    let l:current = filter(items(g:project_manager_projects), {_,v -> v[1].path == getcwd()})
+    if !empty(l:current)
+        call s:SaveProject(l:current[0][0])
+    endif
+
+    if !exists(':FZF')
+        echoerr 'Need fzf.vim installed!'
+        return
+    endif
+
+    call fzf#run({
+                \ 'source': keys(g:project_manager_projects),
+                \ 'sink': function('s:LoadProjectHandler'),
+                \ 'down': '40%'})
+endfunction
+
+function! s:LoadProjectHandler(name) abort
+    let l:project = g:project_manager_projects[a:name]
+
+    silent! %bwipeout!
+    silent! tabonly
+
+    if filereadable(l:project.session)
+        execute 'source' l:project.session
+        execute 'lcd' l:project.path
+        echo 'Project loaded:' a:name
+    else
+        echoerr 'Session file missing!'
+    endif
+
+    if exists(':NERDTree')
+        NERDTree
+        wincmd p
+    endif
+endfunction
+
+nnoremap <Leader>sw :call <SID>SaveProject(input('Project name: '))<CR>
+nnoremap <Leader>ss :call <SID>SwitchProject()<CR>
+
+autocmd VimLeave * call s:AutoSaveSession()
+function! s:AutoSaveSession() abort
+    let l:current = filter(items(g:project_manager_projects), {_,v -> v[1].path == getcwd()})
+    if !empty(l:current)
+        call s:SaveProject(l:current[0][0])
+    endif
+endfunction
