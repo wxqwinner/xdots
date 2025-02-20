@@ -25,3 +25,5 @@ save_to_clipboard = true
   opacity = 0.9
   decorations_theme_variant = "Dark"
   padding = {x = 10, y = 10}
+  dynamic_title = false
+  title = "Alacritty"
