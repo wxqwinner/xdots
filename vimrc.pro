@@ -190,8 +190,8 @@ if filereadable(g:project_manager_config)
     let g:project_manager_projects = json_decode(join(readfile(g:project_manager_config)))
 endif
 
-set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,terminal,localoptions
-
+set sessionoptions+=globals
+set sessionoptions-=blank
 
 function! s:GetProjectName() abort
     let l:root = getcwd()
@@ -202,7 +202,6 @@ function! s:SaveProject() abort
     let l:project_name = s:GetProjectName()
     let l:session_file = printf('%s/%s.session', g:project_manager_dir, substitute(l:project_name, '\s', '_', 'g'))
 
-    set sessionoptions+=globals
     execute 'mksession!' l:session_file
 
     let g:project_manager_projects[l:project_name] = {

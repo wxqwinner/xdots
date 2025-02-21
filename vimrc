@@ -63,12 +63,12 @@ inoremap jj <Esc>:w<CR>
 nnoremap <Esc>x :close<CR>
 inoremap <Esc>x <Esc>:close<CR>
 
-vmap <leader>y "+y
+noremap <leader>y :w !wl-copy<CR><CR>
+noremap <leader>p :r !wl-paste<CR>
 
 " reload vim
 nnoremap <leader>r :source $MYVIMRC<cr>
 
-nnoremap <leader>p "+p
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 
 nmap <leader><leader>l :call CycleLineNumbers()<CR>
