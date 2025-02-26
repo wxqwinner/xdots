@@ -36,7 +36,7 @@ endfunction
 
 autocmd BufEnter * call SetColorColumn()
 autocmd FileType * call SetColorColumn()
-highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+highlight ColorColumn ctermbg=242 guibg=Grey40
 
 "---------------keybinds------------
 nnoremap <SPACE> <Nop>
@@ -60,8 +60,8 @@ map <Esc>l <c-w>l
 
 inoremap jj <Esc>:w<CR>
 
-nnoremap <Esc>x :close<CR>
-inoremap <Esc>x <Esc>:close<CR>
+nnoremap <Esc>x :bdelete<CR>
+inoremap <Esc>x <Esc>:bdelete<CR>
 
 noremap <leader>y :w !wl-copy<CR><CR>
 noremap <leader>p :r !wl-paste<CR>

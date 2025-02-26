@@ -258,7 +258,7 @@ function! s:LoadProject(name) abort
             NERDTreeCWD
             wincmd p
         endif
-
+        source ~/.vimrc
         echo 'Project loaded:' a:name
     else
         echoerr 'Session file missing!'
