@@ -153,6 +153,7 @@ export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 export PATH="~/.local/bin:$PATH"
 alias task='asynctask -f'
+bind '"\e[15~":"task\n"'
 
 # how to use
 # cat arch.bashrc > ~/.bashrc
