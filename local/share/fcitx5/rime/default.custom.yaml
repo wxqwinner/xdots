@@ -2,7 +2,6 @@ patch:
   schema_list:
     - schema: luna_pinyin_simp # 设置简体
   key_binder/bindings:
-    - {when: always, accept: Release+Escape, toggle: ascii_mode} # vim ESC切换输入法
     - {when: has_menu, accept: minus, send: Page_Up} # 设置上翻页键为'-'号
     - {when: has_menu, accept: equal, send: Page_Down} # 设置上翻页键为'='号
   switcher:

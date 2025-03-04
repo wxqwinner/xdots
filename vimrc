@@ -26,6 +26,14 @@ set ttimeoutlen=0
 set autoread
 au FocusGained,BufEnter * silent! checktime
 
+function! SwitchToEnglish()
+    if trim(system("fcitx5-remote")) == "2"
+        call system("fcitx5-remote -c")
+    endif
+endfunction
+
+autocmd FocusGained * call SwitchToEnglish()
+
 function! SetColorColumn()
     if &filetype =~# '\v^(c|cpp|h|python)$'
         set colorcolumn=80,120
@@ -63,8 +71,12 @@ inoremap jj <Esc>:w<CR>
 nnoremap <Esc>x :bdelete<CR>
 inoremap <Esc>x <Esc>:bdelete<CR>
 
+nnoremap <leader>q :close<CR>
+nnoremap <leader>o :only<CR>
 noremap <leader>y :w !wl-copy<CR><CR>
 noremap <leader>p :r !wl-paste<CR>
+nnoremap <leader>s :split<CR>
+nnoremap <leader>v :vsplit<CR>
 
 " reload vim
 nnoremap <leader>r :source $MYVIMRC<cr>

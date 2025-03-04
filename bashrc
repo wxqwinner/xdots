@@ -150,5 +150,9 @@ ulimit -c 409600
 export PATH="/opt/platforms/x64/rootfs/bin:$PATH"
 export PATH="~/Software/bin:$PATH"
 export ELECTRON_OZONE_PLATFORM_HINT=auto
+
+export PATH="~/.local/bin:$PATH"
+alias task='asynctask -f'
+
 # how to use
 # cat arch.bashrc > ~/.bashrc

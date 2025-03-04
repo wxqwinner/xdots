@@ -13,6 +13,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow'              " rainbow
     Plug 'tpope/vim-repeat'                 " repeat
     Plug 'puremourning/vimspector'          " debug
+    Plug 'skywind3000/asynctasks.vim'       " async tasks
+    Plug 'skywind3000/asyncrun.vim'         " async run
     Plug 'neoclide/coc.nvim', {'branch': 'release'} " lsp
 call plug#end()
 
@@ -275,3 +277,8 @@ function! s:AutoSaveSession() abort
         call s:SaveProject()
     endif
 endfunction
+
+" async tasks
+let g:asyncrun_open = 6
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
+
