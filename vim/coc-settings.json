@@ -1,3 +1,22 @@
 {
-  "suggest.noselect": true
-}
+    "suggest.noselect": true,
+    "diagnostic.enable": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextCurrentLineOnly": true,
+    "diagnostic.virtualTextPrefix": "🚀 ",
+    "diagnostic.virtualTextHighlight": "WarningMsg",
+
+    "languageserver": {
+      "clangd": {
+        "command": "clangd",
+        "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+        "filetypes": ["c", "cpp", "objc", "objcpp"]
+      }
+    },
+
+    "python.jediEnabled": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.useLibraryCodeForTypes": true
+  }
