@@ -45,10 +45,6 @@ print_help() {
   echo "          You can try this if a running program is not recognized and"
   echo "          a new instance is launched instead."
   echo ""
-  echo "  -o, --online"
-  echo "          Delay initial launch for up to 20 seconds"
-  echo "          until internet connectivity is established."
-  echo ""
   echo "  -p, --position"
   echo "          If using --floating: set the position of the window."
   echo "          One of: '[t]op' '[b]ottom' '[l]eft' '[r]ight'."
@@ -94,15 +90,6 @@ partial_match() {
   CLASS=$(hyprctl -j clients | jq -r ".[] | select((.class |match(\"$1\";\"i\"))) | .class" | head -n -1)
 }
 
-wait_online() {
-  wait_online=0
-  while [[ $wait_online -lt 200 ]]; do
-    ping -qc 1 github.com && break
-    sleep 0.1
-    $wait_online++
-  done
-}
-
 hdrop_flags() {
   while true; do
     case "$1" in
@@ -134,9 +121,6 @@ hdrop_flags() {
     -i | --insensitive)
       INSENSITIVE=true
       ;;
-    -o | --online)
-      ONLINE=true
-      ;;
     -p | --position)
       shift
       POSITION="$1"
@@ -162,7 +146,6 @@ BACKGROUND=""
 FOCUS=false
 GAP=0
 INSENSITIVE=false
-ONLINE=false
 FLOATING=false
 POSITION="top"
 VERBOSE=false
@@ -309,7 +292,6 @@ elif [[ -n $(hyprctl -j clients | jq -r ".[] | select(.class==\"$CLASS\" and .wo
     hyprctl dispatch -- focuswindow "class:^$CLASS$" || notify "hdrop: Error focusing '$COMMANDLINE' on current workspace"
   fi
 else
-  if $ONLINE; then wait_online; fi
   # 'foot' always throws an error when its window is closed. Thus we disable the notification.
   if [[ $COMMAND == "foot" ]]; then
     # shellcheck disable=SC2086 # when quoting COMMANDLINE the execution of the command fails
