@@ -36,6 +36,7 @@ export default function Applauncher() {
     const { CENTER } = Gtk.Align
     const apps = new Apps.Apps()
     const width = Variable(1000)
+    let entryRef
 
     const text = Variable("")
     const list = text(text => apps.fuzzy_query(text).slice(0, MAX_ITEMS))
@@ -54,6 +55,9 @@ export default function Applauncher() {
         onShow={(self) => {
             text.set("")
             width.set(self.get_current_monitor().workarea.width)
+            if (entryRef) {
+                entryRef.grab_focus()
+            }
         }}
         onKeyPressEvent={function (self, event: Gdk.Event) {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)
@@ -67,6 +71,10 @@ export default function Applauncher() {
                     <entry
                         placeholderText="Search"
                         text={text()}
+                        setup={self => {
+                            entryRef = self
+                            self.grab_focus()
+                        }}
                         onChanged={self => text.set(self.text)}
                         onActivate={onEnter}
                     />
