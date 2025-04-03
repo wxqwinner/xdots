@@ -22,7 +22,7 @@ set hlsearch incsearch ignorecase smartcase
 syntax enable
 set list
 set listchars=tab:>-,trail:-
-set ttimeoutlen=0
+set ttimeoutlen=50
 set autoread
 au FocusGained,BufEnter * silent! checktime
 
@@ -50,6 +50,7 @@ highlight ColorColumn ctermbg=242 guibg=Grey40
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 nmap <leader>w :w!<cr>
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 map <Left> <Nop>
 map <Right> <Nop>

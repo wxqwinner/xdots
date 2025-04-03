@@ -1,6 +1,8 @@
 .bak
 config/thunar/accels.scm
 config/thunar/renamerrc
+vim/sessions
+vim/projects.json
 
 # py
 __pycache__/

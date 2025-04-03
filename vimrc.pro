@@ -178,105 +178,10 @@ nnoremap <silent> <Esc>t :call ToggleTerminal()<CR>
 tnoremap <silent> <Esc>t <C-w>:call ToggleTerminal()<CR>
 tnoremap <Esc>x <C-\><C-n>:bdelete!<CR>
 
-let NERDTreeCreatePrefix='silent keepalt keepjumps'
-let NERDTreeRespectWildIgnore=1
-let g:project_manager_dir = expand('~/.vim/sessions')
-let g:project_manager_projects = {}
-let g:project_manager_config = expand('~/.vim/projects.json')
-
-if !isdirectory(g:project_manager_dir)
-    call mkdir(g:project_manager_dir, 'p')
-endif
-
-if filereadable(g:project_manager_config)
-    let g:project_manager_projects = json_decode(join(readfile(g:project_manager_config)))
-endif
-
-set sessionoptions+=globals
-set sessionoptions-=blank
-
-function! s:GetProjectName() abort
-    let l:root = getcwd()
-    return fnamemodify(l:root, ':t')
-endfunction
-
-function! s:SaveProject() abort
-    let l:project_name = s:GetProjectName()
-    let l:session_file = printf('%s/%s.session', g:project_manager_dir, substitute(l:project_name, '\s', '_', 'g'))
-
-    execute 'mksession!' l:session_file
-
-    let g:project_manager_projects[l:project_name] = {
-                \ 'path': getcwd(),
-                \ 'session': l:session_file,
-                \ 'timestamp': strftime('%Y-%m-%d %H:%M:%S')
-                \ }
-
-    call writefile([json_encode(g:project_manager_projects)], g:project_manager_config)
-    echo 'Project saved:' l:project_name
-endfunction
-
-function! s:SwitchProject() abort
-    let l:current = filter(items(g:project_manager_projects), {_,v -> v[1].path == getcwd()})
-    if !empty(l:current)
-        call s:SaveProject()
-    endif
-
-    let l:project_list = ['Select a project:']
-    let l:index = 0
-    for [l:name, l:info] in items(g:project_manager_projects)
-        let l:index += 1
-        call add(l:project_list, printf('%d. %s (%s)', l:index, l:name, l:info.path))
-    endfor
-
-    let l:choice = inputlist(l:project_list)
-    if l:choice < 1 || l:choice > len(g:project_manager_projects)
-        echo 'No project selected.'
-        return
-    endif
-
-    let l:project_name = keys(g:project_manager_projects)[l:choice - 1]
-    call s:LoadProject(l:project_name)
-endfunction
-
-function! s:LoadProject(name) abort
-    let l:project = g:project_manager_projects[a:name]
-
-    silent! %bwipeout!
-    silent! tabonly
-
-    if exists(':NERDTreeClose')
-        NERDTreeClose
-    endif
-
-    if filereadable(l:project.session)
-        execute 'source' l:project.session
-        execute 'lcd' l:project.path
-        if exists(':NERDTree')
-            if bufexists('NERD_tree_1')
-                silent! execute 'bwipeout NERD_tree_1'
-            endif
-
-            NERDTreeCWD
-            wincmd p
-        endif
-        source ~/.vimrc
-        echo 'Project loaded:' a:name
-    else
-        echoerr 'Session file missing!'
-    endif
-endfunction
-
-nnoremap <Leader>sw :call <SID>SaveProject()<CR>
-nnoremap <Leader>ss :call <SID>SwitchProject()<CR>
-
-autocmd VimLeave * call s:AutoSaveSession()
-function! s:AutoSaveSession() abort
-    let l:current = filter(items(g:project_manager_projects), {_,v -> v[1].path == getcwd()})
-    if !empty(l:current)
-        call s:SaveProject()
-    endif
-endfunction
+call project#Init()
+nnoremap <Leader>sw :call project#SaveProject()<CR>
+nnoremap <Leader>ss :call project#SwitchProject()<CR>
+autocmd VimLeave * call project#AutoSaveSession()
 
 " async tasks
 let g:asyncrun_open = 6
