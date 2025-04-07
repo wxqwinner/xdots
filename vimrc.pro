@@ -18,6 +18,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'} " lsp
 call plug#end()
 
+nnoremap <leader>ch :call comment#InsertHeaderComment()<CR>
+nnoremap <leader>cf :call comment#InsertFunctionComment()<CR>
+
+
 " dracula/vim
 colorscheme dracula
 
@@ -148,34 +152,13 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-
 tnoremap <Esc>h <C-w>h
 tnoremap <Esc>j <C-w>j
 tnoremap <Esc>k <C-w>k
 tnoremap <Esc>l <C-w>l
 
-"map <Esc>t :terminal<CR><C-W>J<C-W>10-
-" todo alt+n next or create, alt+t toggle, alt+p prev
-let g:toggle_terminal_command = 'bash'
-let g:toggle_terminal_position = 'below'
-function! ToggleTerminal()
-    let bufferNum = bufnr('ToggleTerminal')
-    if bufferNum == -1 || bufloaded(bufferNum) != 1
-        execute g:toggle_terminal_position.' term ++close ++kill=term '.g:toggle_terminal_command
-        file ToggleTerminal
-    else
-        let windowNum = bufwinnr(bufferNum)
-        if windowNum == -1
-            execute g:toggle_terminal_position.' sbuffer '.bufferNum
-        else
-            execute windowNum.'wincmd w'
-            hide
-        endif
-    endif
-endfunction
-
-nnoremap <silent> <Esc>t :call ToggleTerminal()<CR>
-tnoremap <silent> <Esc>t <C-w>:call ToggleTerminal()<CR>
+nnoremap <silent> <Esc>t :call terminal#ToggleTerminal()<CR>
+tnoremap <silent> <Esc>t <C-w>:call terminal#ToggleTerminal()<CR>
 tnoremap <Esc>x <C-\><C-n>:bdelete!<CR>
 
 call project#Init()
