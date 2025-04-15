@@ -23,6 +23,7 @@ nnoremap <leader>cf :call comment#InsertFunctionComment()<CR>
 
 
 " dracula/vim
+let g:airline_theme='dracula'
 colorscheme dracula
 
 " vim-autoformat

@@ -13,7 +13,6 @@ let g:py_header_comment = [
             \ '',
             \ 'Copyright (c) %YEAR% %AUTHOR%.',
             \ '"""',
-            \ '',
             \ ''
             \]
 
@@ -26,8 +25,6 @@ let g:c_header_comment = [
             \ ' *',
             \ ' * Copyright (c) %YEAR% %AUTHOR%',
             \ ' */',
-            \ '',
-            \ ''
             \]
 
 let g:py_function_comment = [
