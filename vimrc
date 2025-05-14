@@ -110,6 +110,16 @@ fun! ToggleFold()
     endif
 endfun
 
+"----------------netrw----------------
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+let g:netrw_showhide=1
+let g:netrw_winsize=20
+map <leader>e :Lex<CR>
+let g:netrw_mousemaps = 0
+
 "----------------fcitx----------------
 if exists('g:fcitx_auto')
     finish

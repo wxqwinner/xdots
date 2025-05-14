@@ -3,7 +3,6 @@
 call plug#begin('~/.vim/plugged')
     Plug 'dracula/vim', { 'as': 'dracula' } " theme
     Plug 'vim-autoformat/vim-autoformat'    " code format
-    Plug 'preservim/nerdtree'               " files
     Plug 'preservim/nerdcommenter'          " code comment
     Plug 'vim-airline/vim-airline'          " status bar
     Plug 'tpope/vim-fugitive'               " git
@@ -32,11 +31,6 @@ let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 autocmd FileType vim,tex let b:autoformat_autoindent=0
 au BufWrite * :Autoformat
-
-" preservim/nerdtree
-let NERDTreeShowHidden = 1
-let NERDTreeIgnore = ['^\.git$', '^node_modules$', '^\.cache$', '^\.vscode$', '^__pycache__$', '^build.*[[dir]]', '^legacy$[[dir]]', '^data$']
-map <Leader>e :NERDTreeToggle<CR>
 
 " preservim/nerdcommenter
 let g:NERDCreateDefaultMappings = 1
