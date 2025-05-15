@@ -51,7 +51,8 @@ function SpeakerLevel() {
 function MicrophoneLevel() {
     const microphone = Wp.get_default()?.audio.defaultMicrophone!
 
-    return <box><icon icon={bind(microphone, "volumeIcon")} /></box>}
+    return <box><icon icon={bind(microphone, "volumeIcon")} /></box>
+}
 
 function BatteryLevel() {
     const bat = Battery.get_default()
