@@ -43,18 +43,15 @@ function Wifi() {
 }
 
 function SpeakerLevel() {
-    const speaker = Wp.get_default()?.audio.default_speaker!
+    const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-    return <icon icon={bind(speaker, "volumeIcon")} />
-
+    return <box><icon icon={bind(speaker, "volumeIcon")} /></box>
 }
 
 function MicrophoneLevel() {
-    const microphone = Wp.get_default()?.audio.default_microphone!
+    const microphone = Wp.get_default()?.audio.defaultMicrophone!
 
-    return <icon icon={"microphone_30"} />
-
-}
+    return <box><icon icon={bind(microphone, "volumeIcon")} /></box>}
 
 function BatteryLevel() {
     const bat = Battery.get_default()
@@ -81,13 +78,13 @@ function Media() {
                     )}
                 />
                 <label
-                    label={bind(ps[0], "title").as(() =>
+                    label={bind(ps[0], "metadata").as(() =>
                         `${ps[0].title.substring(0, Math.min(60, ps[0].title.length))} - ${ps[0].artist}`
                     )}
                 />
             </box>
         ) : (
-            "Nothing Playing"
+            <label label="Nothing Playing" />
         ))}
     </box>
 }

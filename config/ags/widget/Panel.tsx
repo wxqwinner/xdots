@@ -8,7 +8,7 @@ function hide() {
 }
 
 function SpeakerSlider() {
-    const speaker = Wp.get_default()?.audio.default_speaker!
+    const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
     return <box className="AudioSlider" css="min-width: 140px">
         <icon icon={bind(speaker, "volumeIcon")} />
@@ -21,10 +21,10 @@ function SpeakerSlider() {
 }
 
 function microphoneSlider() {
-    const microphone = Wp.get_default()?.audio.default_microphone!
+    const microphone = Wp.get_default()?.audio.defaultMicrophone!
 
     return <box className="AudioSlider" css="min-width: 140px">
-        <icon icon={"microphone_30"} />
+        <icon icon={bind(microphone, "volumeIcon")} />
         <slider
             hexpand
             onDragged={({ value }) => microphone.volume = value}
