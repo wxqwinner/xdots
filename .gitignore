@@ -4,6 +4,7 @@ config/thunar/renamerrc
 vim/sessions
 vim/projects.json
 vim/.netrwhist
+vim/plugged
 
 # py
 __pycache__/
