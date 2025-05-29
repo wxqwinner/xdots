@@ -3,6 +3,7 @@ config/thunar/accels.scm
 config/thunar/renamerrc
 vim/sessions
 vim/projects.json
+vim/.netrwhist
 
 # py
 __pycache__/
