@@ -18,5 +18,8 @@
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.autoSearchPaths": true,
     "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.useLibraryCodeForTypes": true
-  }
+    "python.analysis.useLibraryCodeForTypes": true,
+    "explorer.keyMappings.global":{
+        "<cr>": [ "expandable?", ["expanded?", "collapse", "expand"], "open" ]
+    }
+}

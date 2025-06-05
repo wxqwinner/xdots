@@ -20,6 +20,46 @@ call plug#end()
 nnoremap <leader>ch :call comment#InsertHeaderComment()<CR>
 nnoremap <leader>cf :call comment#InsertFunctionComment()<CR>
 
+" We bind it to <leader>e here, feel free to change this
+nmap <leader>e :CocCommand explorer<CR>
+
+function! s:explorer_cur_file()
+  let node_info = CocAction('runCommand', 'explorer.getNodeInfo', 0)
+  return get(node_info, 'fullpath', '')
+endfunction
+
+function! s:exec_git_diff(cmd)
+  let file = s:explorer_cur_file()
+  if empty(file)
+    echom "Error: No file selected in coc-explorer!"
+    return
+  endif
+  if filereadable(file)
+    if a:cmd =~ '^!'
+      " For external commands (e.g., git difftool), use silent! to avoid terminal prompt
+      silent! execute a:cmd . ' ' . fnameescape(file)
+      redraw!
+    else
+      " For internal commands (e.g., Gdiffsplit)
+      execute 'edit ' . fnameescape(file)
+      execute a:cmd
+    endif
+  else
+    echom "Error: '" . file . "' is not a readable file!"
+  endif
+endfunction
+
+" Initialize coc-explorer key mappings
+function! s:init_explorer()
+  nmap <buffer> gS <Cmd>call <SID>exec_git_diff('Gvdiffsplit')<CR>
+  nmap <buffer> gD <Cmd>call <SID>exec_git_diff('!git difftool --tool=meld')<CR>
+endfunction
+
+augroup CocExplorerCustom
+  autocmd!
+  autocmd FileType coc-explorer call <SID>init_explorer()
+augroup END
+
 
 " dracula/vim
 let g:airline_theme='dracula'

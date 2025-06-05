@@ -1,5 +1,7 @@
 [user]
-	name = wxqwinner
-	email = wxqwinner@gmail.com
+    name = wxqwinner
+    email = wxqwinner@gmail.com
 [core]
-	editor = vim
+    editor = vim
+[difftool]
+    prompt = false

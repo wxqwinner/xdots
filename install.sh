@@ -25,3 +25,5 @@ mv ~/.bashrc .bak
 ln -s ${current_dir}/bashrc ~/.bashrc
 
 ln -s ${current_dir}/config/thunar/ ~/.config/Thunar
+
+ln -s /home/shacon/Workspace/xdots/gitconfig ~/.gitconfig

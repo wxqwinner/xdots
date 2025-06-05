@@ -24,6 +24,7 @@ set list
 set listchars=tab:>-,trail:-
 set ttimeoutlen=50
 set autoread
+set nosplitright
 au FocusGained,BufEnter * silent! checktime
 
 function! SwitchToEnglish()
@@ -68,6 +69,10 @@ map <Esc>k <c-w>k
 map <Esc>l <c-w>l
 
 inoremap jj <Esc>:w<CR>
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 nnoremap <Esc>x :bdelete<CR>
 inoremap <Esc>x <Esc>:bdelete<CR>
@@ -117,7 +122,7 @@ let g:netrw_banner=0
 let g:netrw_liststyle=3
 let g:netrw_showhide=1
 let g:netrw_winsize=20
-map <leader>e :Lex<CR>
+"map <leader>e :Lex<CR>
 let g:netrw_mousemaps = 0
 
 "----------------fcitx----------------
