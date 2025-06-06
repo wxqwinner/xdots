@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'          " status bar
     Plug 'tpope/vim-fugitive'               " git
     Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }               " fuzzy search
-    Plug 'preservim/tagbar'                 " show tag bar
     Plug 'ludovicchabant/vim-gutentags'     " auto generate tags
     Plug 'luochen1990/rainbow'              " rainbow
     Plug 'tpope/vim-repeat'                 " repeat
@@ -41,7 +40,7 @@ function! s:exec_git_diff(cmd)
       redraw!
     else
       " For internal commands (e.g., Gdiffsplit)
-      execute 'edit ' . fnameescape(file)
+      execute 'tabe ' . fnameescape(file)
       execute a:cmd
     endif
   else
@@ -86,19 +85,40 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#formatter = 'default'
 set laststatus=2
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_tab_type = 1
 
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>0 <Plug>AirlineSelectTab0
-nmap <Tab> <Plug>AirlineSelectNextTab
-nmap <S-Tab> <Plug>AirlineSelectPrevTab
+"nmap <leader>1 <Plug>AirlineSelectTab1
+"nmap <leader>2 <Plug>AirlineSelectTab2
+"nmap <leader>3 <Plug>AirlineSelectTab3
+"nmap <leader>4 <Plug>AirlineSelectTab4
+"nmap <leader>5 <Plug>AirlineSelectTab5
+"nmap <leader>6 <Plug>AirlineSelectTab6
+"nmap <leader>7 <Plug>AirlineSelectTab7
+"nmap <leader>8 <Plug>AirlineSelectTab8
+"nmap <leader>9 <Plug>AirlineSelectTab9
+"nmap <leader>0 <Plug>AirlineSelectTab0
+"nmap <Tab> <Plug>AirlineSelectNextTab
+"nmap <S-Tab> <Plug>AirlineSelectPrevTab
+
+noremap <silent><tab>m :tabnew<cr>
+noremap <silent><tab>e :tabclose<cr>
+noremap <silent><tab>n :tabn<cr>
+noremap <silent><tab>p :tabp<cr>
+noremap <silent><leader>t :tabnew<cr>
+noremap <silent><leader>g :tabclose<cr>
+noremap <silent><leader>1 :tabn 1<cr>
+noremap <silent><leader>2 :tabn 2<cr>
+noremap <silent><leader>3 :tabn 3<cr>
+noremap <silent><leader>4 :tabn 4<cr>
+noremap <silent><leader>5 :tabn 5<cr>
+noremap <silent><leader>6 :tabn 6<cr>
+noremap <silent><leader>7 :tabn 7<cr>
+noremap <silent><leader>8 :tabn 8<cr>
+noremap <silent><leader>9 :tabn 9<cr>
+noremap <silent><leader>0 :tabn 10<cr>
+noremap <silent><s-tab> :tabnext<CR>
+inoremap <silent><s-tab> <ESC>:tabnext<CR>
 
 " luochen1990/rainbow
 let g:rainbow_active = 1
@@ -117,8 +137,7 @@ noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 let g:Lf_IgnoreFiles = '\v[\/]\.(git|hg|svn|cache)$'
 let g:Lf_DirCacheExcludePattern = '[/\\]?(\\.git|\.hg|\.svn|__pycache__)$'
 
-" preservim/tagbar
-map <leader>m :TagbarToggle<CR>
+noremap <F2> :LeaderfFunction!<cr>
 
 " ludovicchabant/vim-gutentags
 let g:gutentags_cache_dir = "~/.cache/tags"

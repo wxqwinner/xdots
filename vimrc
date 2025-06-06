@@ -24,7 +24,6 @@ set list
 set listchars=tab:>-,trail:-
 set ttimeoutlen=50
 set autoread
-set nosplitright
 au FocusGained,BufEnter * silent! checktime
 
 function! SwitchToEnglish()
