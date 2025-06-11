@@ -56,6 +56,21 @@ map <Left> <Nop>
 map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+
+nnoremap <C-h> <Left>
+nnoremap <C-j> <Down>
+nnoremap <C-k> <Up>
+nnoremap <C-l> <Right>
+
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap jj <Esc>:w<CR>
 
 map <leader>h ^
 map <leader>l $
@@ -66,12 +81,6 @@ map <Esc>h <c-w>h
 map <Esc>j <c-w>j
 map <Esc>k <c-w>k
 map <Esc>l <c-w>l
-
-inoremap jj <Esc>:w<CR>
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
 
 nnoremap <Esc>x :bdelete<CR>
 inoremap <Esc>x <Esc>:bdelete<CR>
