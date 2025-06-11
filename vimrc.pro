@@ -50,8 +50,8 @@ endfunction
 
 " Initialize coc-explorer key mappings
 function! s:init_explorer()
-  nmap <buffer> gS <Cmd>call <SID>exec_git_diff('Gvdiffsplit')<CR>
-  nmap <buffer> gD <Cmd>call <SID>exec_git_diff('!git difftool --tool=meld')<CR>
+  nmap <buffer> ga <Cmd>call <SID>exec_git_diff('Gvdiffsplit')<CR>
+  nmap <buffer> gm <Cmd>call <SID>exec_git_diff('!git difftool --tool=meld')<CR>
 endfunction
 
 augroup CocExplorerCustom
@@ -203,6 +203,7 @@ tnoremap <Esc>l <C-w>l
 nnoremap <silent> <Esc>t :call terminal#ToggleTerminal()<CR>
 tnoremap <silent> <Esc>t <C-w>:call terminal#ToggleTerminal()<CR>
 tnoremap <Esc>x <C-\><C-n>:bdelete!<CR>
+tnoremap <Esc><Esc> <C-\><C-N>
 
 call project#Init()
 nnoremap <Leader>sw :call project#SaveProject()<CR>
