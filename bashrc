@@ -69,14 +69,6 @@ alias proxyoff='proxy_off'
 alias preproxy='pre_proxy'
 alias proxytest='preproxy curl cip.cc'
 
-
-# undistract-me
-export IGNORE_WINDOW_CHECK=1
-export LONG_RUNNING_COMMAND_TIMEOUT=60
-source /etc/profile.d/undistract-me.sh
-#source /usr/share/undistract-me/long-running.bash
-#notify_when_long_running_commands_finish_install
-
 # history command
 export HISTTIMEFORMAT="%Y/%m/%d %T "
 export HISTSIZE=10000
