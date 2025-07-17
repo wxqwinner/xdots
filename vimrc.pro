@@ -13,11 +13,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'puremourning/vimspector'          " debug
     Plug 'skywind3000/asynctasks.vim'       " async tasks
     Plug 'skywind3000/asyncrun.vim'         " async run
+    Plug 'yianwillis/vimcdoc'               " vimcdoc
     Plug 'neoclide/coc.nvim', {'branch': 'release'} " lsp
 call plug#end()
 
 nnoremap <leader>ch :call comment#InsertHeaderComment()<CR>
 nnoremap <leader>cf :call comment#InsertFunctionComment()<CR>
+
+let g:vimspector_enable_mappings = 'HUMAN'
 
 " We bind it to <leader>e here, feel free to change this
 nmap <leader>e :CocCommand explorer<CR>
