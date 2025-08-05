@@ -4,3 +4,5 @@
 git config --global difftool.prompt false
 
 把git的配置也管理起来
+
+conda配置不能用软链接
