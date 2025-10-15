@@ -147,5 +147,8 @@ export PATH="~/.local/bin:$PATH"
 alias task='asynctask -f'
 bind '"\e[15~":"task\n"'
 
+# esp32
+#source /opt/esp-idf/export.sh
+
 # how to use
 # cat arch.bashrc > ~/.bashrc
