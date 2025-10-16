@@ -38,7 +38,7 @@ function parse_git {
 	fi
 }
 
-export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]$(parse_git)]\$\[\033[00m\] '
+export PS1='\[\033[01;32m\][\u@\h \[\033[01;37m\]\W\[\033[01;32m\]$(type -t parse_git >/dev/null && parse_git)]\$\[\033[00m\] '
 # copy current path to clip
 alias ccp='pwd | awk '\''{printf $0}'\'' | xclip -sel clip'
 
