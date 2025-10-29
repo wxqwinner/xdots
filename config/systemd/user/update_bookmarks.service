@@ -1,0 +1,6 @@
+[Unit]
+Description=update recent bookmarks
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/shacon/.local/bin/update_bookmarks.py

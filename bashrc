@@ -149,6 +149,8 @@ bind '"\e[15~":"task\n"'
 
 # esp32
 #source /opt/esp-idf/export.sh
+alias esp='source /home/shacon/.espressif/python_env/idf5.5_py3.13_env/bin/activate && source ~/.esp/v5.5/esp-idf/export.sh'
+
 
 # how to use
 # cat arch.bashrc > ~/.bashrc

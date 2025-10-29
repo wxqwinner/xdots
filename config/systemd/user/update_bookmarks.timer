@@ -1,0 +1,10 @@
+[Unit]
+Description=每5分钟更新 GTK 书签顶部常用目录
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+Persistent=true
+
+[Install]
+WantedBy=default.target
