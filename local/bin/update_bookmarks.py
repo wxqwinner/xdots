@@ -25,7 +25,7 @@ INIT = "--init" in sys.argv
 MERGE_LEVEL = 3  # 合并前几级目录
 AUTO_PREFIX = "⭐"  # 特殊符号前缀
 RECENT_LIMIT = 10
-FILTER_DIRS = ["Downloads"]
+FILTER_DIRS = ["Downloads", " "]
 
 # 检查 recently-used.xbel 是否存在
 if not os.path.isfile(RECENT_FILE):
@@ -41,7 +41,7 @@ for bookmark in root.findall(".//bookmark"):
     if href and href.startswith("file://"):
         path = urllib.parse.unquote(href[7:])  # 去掉 file:// 并解码 URI
         dir_path = path if os.path.isdir(path) else os.path.dirname(path)
-        if os.path.isdir(dir_path):
+        if os.path.isdir(dir_path) and os.access(dir_path, os.R_OK):
             dirs.append(dir_path)
 
 
