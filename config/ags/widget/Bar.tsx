@@ -13,6 +13,7 @@ import { createPoll } from "ags/time"
 import { execAsync } from "ags/process"
 import Hyprland from "gi://AstalHyprland"
 import Caffeine from "./Caffeine"
+import LanIPAddress from "./LanIPAddress"
 
 function Tray() {
     const tray = AstalTray.get_default()
@@ -238,6 +239,7 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
                     <AudioOutput />
                     <Caffeine />
                     <Battery />
+                    <LanIPAddress />
                     <Clock />
                 </box>
             </centerbox>
