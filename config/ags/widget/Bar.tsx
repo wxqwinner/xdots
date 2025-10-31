@@ -12,6 +12,7 @@ import { For, With, createBinding, onCleanup } from "ags"
 import { createPoll } from "ags/time"
 import { execAsync } from "ags/process"
 import Hyprland from "gi://AstalHyprland"
+import Caffeine from "./Caffeine"
 
 function Tray() {
     const tray = AstalTray.get_default()
@@ -235,6 +236,7 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
                     <Tray />
                     <Wireless />
                     <AudioOutput />
+                    <Caffeine />
                     <Battery />
                     <Clock />
                 </box>

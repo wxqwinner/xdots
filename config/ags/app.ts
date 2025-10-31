@@ -22,6 +22,7 @@ app.start({
                 return res("unknown command")
         }
     },
+    icons: `${SRC}/assets/icons`,
     main() {
         for (const monitor of app.get_monitors()) {
             if (monitor.model == "0x08DF") {
