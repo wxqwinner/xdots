@@ -4,6 +4,7 @@ import Bar from "./widget/Bar"
 import Applauncher from "./widget/Applauncher"
 import GLib from "gi://GLib"
 import Gtk from "gi://Gtk?version=4.0"
+import NotificationPopups from "./widget/NotificationPopups"
 
 let applauncher: Gtk.Window
 
@@ -27,6 +28,7 @@ app.start({
                 Bar(monitor)
             }
         }
+        NotificationPopups()
         applauncher = Applauncher() as Gtk.Window
         app.add_window(applauncher)
         applauncher.present()
