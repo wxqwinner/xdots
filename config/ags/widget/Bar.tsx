@@ -183,20 +183,29 @@ function Clock({ format = "%a. %e-%h %H:%M " }) {
 function Workspaces() {
     const hypr = Hyprland.get_default()
 
-    return <box class="Workspaces">
-        {createBinding(hypr, "workspaces").as(wss => wss
-            .filter(ws => !(ws.id >= -99 && ws.id <= -2))
-            .sort((a, b) => a.id - b.id)
-            .map(ws => (
-                <button
-                    class={createBinding(hypr, "focusedWorkspace").as(fw =>
-                        ws === fw ? "focused" : "")}
-                    onClicked={() => ws.focus()}>
-                    {ws.id}
-                </button>
-            ))
-        ).get()}
-    </box>
+    const workspaces = createBinding(hypr, "workspaces")
+    const focusedWorkspace = createBinding(hypr, "focusedWorkspace")
+
+    return (
+        <box class="Workspaces">
+            <For each={workspaces((wss) =>
+                wss
+                    .filter(ws => !(ws.id >= -99 && ws.id <= -2))
+                    .sort((a, b) => a.id - b.id)
+            )}>
+                {(ws) => (
+                    <button
+                        class={focusedWorkspace((fw) =>
+                            ws === fw ? "focused" : ""
+                        )}
+                        onClicked={() => ws.focus()}
+                    >
+                        {ws.id}
+                    </button>
+                )}
+            </For>
+        </box>
+    )
 }
 
 
