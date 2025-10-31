@@ -114,6 +114,25 @@ function AudioOutput() {
     )
 }
 
+function AudioInput() {
+    const { defaultMicrophone: microphone } = AstalWp.get_default()!
+
+    return (
+        <menubutton>
+            <image iconName={createBinding(microphone, "volumeIcon")} />
+            <popover>
+                <box>
+                    <slider
+                        widthRequest={260}
+                        onChangeValue={({ value }) => microphone.set_volume(value)}
+                        value={createBinding(microphone, "volume")}
+                    />
+                </box>
+            </popover>
+        </menubutton>
+    )
+}
+
 function Battery() {
     const battery = AstalBattery.get_default()
     const powerprofiles = AstalPowerProfiles.get_default()
@@ -236,6 +255,7 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
                 <box $type="end">
                     <Tray />
                     <Wireless />
+                    <AudioInput />
                     <AudioOutput />
                     <Caffeine />
                     <Battery />
