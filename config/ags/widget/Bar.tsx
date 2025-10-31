@@ -11,6 +11,7 @@ import AstalApps from "gi://AstalApps"
 import { For, With, createBinding, onCleanup } from "ags"
 import { createPoll } from "ags/time"
 import { execAsync } from "ags/process"
+import Hyprland from "gi://AstalHyprland"
 
 function Tray() {
     const tray = AstalTray.get_default()
@@ -143,7 +144,7 @@ function Battery() {
     )
 }
 
-function Clock({ format = "%H:%M" }) {
+function Clock({ format = "%a. %e-%h %H:%M " }) {
     const time = createPoll("", 1000, () => {
         return GLib.DateTime.new_now_local().format(format)!
     })
@@ -155,6 +156,47 @@ function Clock({ format = "%H:%M" }) {
                 <Gtk.Calendar />
             </popover>
         </menubutton>
+    )
+}
+
+function Workspaces() {
+    const hypr = Hyprland.get_default()
+
+    return <box class="Workspaces">
+        {createBinding(hypr, "workspaces").as(wss => wss
+            .filter(ws => !(ws.id >= -99 && ws.id <= -2))
+            .sort((a, b) => a.id - b.id)
+            .map(ws => (
+                <button
+                    class={createBinding(hypr, "focusedWorkspace").as(fw =>
+                        ws === fw ? "focused" : "")}
+                    onClicked={() => ws.focus()}>
+                    {ws.id}
+                </button>
+            ))
+        ).get()}
+    </box>
+}
+
+
+function FocusedClient() {
+    const hypr = Hyprland.get_default()
+
+    const focused = createBinding(hypr, "focusedClient")
+
+    const title = focused.as(client => {
+        if (!client) return ""
+        const t = client.title ?? ""
+        return t.length > 40 ? t.slice(0, 40) + "..." : t
+    })
+
+    return (
+        <box
+            class="FocusedClient"
+            visible={focused.as(Boolean)}
+        >
+            <label label={title} />
+        </box>
     )
 }
 
@@ -186,13 +228,15 @@ export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
         >
             <centerbox>
                 <box $type="start">
-                    <Clock />
+                    <Workspaces />
+                    <FocusedClient />
                 </box>
                 <box $type="end">
                     <Tray />
                     <Wireless />
                     <AudioOutput />
                     <Battery />
+                    <Clock />
                 </box>
             </centerbox>
         </window>
