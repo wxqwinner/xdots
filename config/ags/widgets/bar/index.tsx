@@ -18,6 +18,9 @@ export default function Bar({ monitor }: { monitor: Gdk.Monitor }) {
             name={`bar-${monitorName}`}
             cssClasses={["Bar"]}
             gdkmonitor={monitor}
+            margin-top={4}
+            margin-left={4}
+            margin-right={4}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
             anchor={TOP | LEFT | RIGHT}
             application={app}

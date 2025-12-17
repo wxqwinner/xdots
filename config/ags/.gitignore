@@ -1,2 +1,18 @@
+# Dependencies
 node_modules/
+
+# Generated type definitions
 @girs/
+
+# Build artifacts
+*.js
+*.js.map
+
+# Editor
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
