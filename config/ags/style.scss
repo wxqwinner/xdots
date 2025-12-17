@@ -67,10 +67,15 @@ window.Bar {
 
     .centerbox {
         background: $bar-bg-color;
-        border-bottom: 2px solid $purple-primary;
         min-height: 36px;
         padding: 0 12px;
+
+        border-radius: $bar-radius;
+
+        outline: 2px solid $purple-primary;
+        outline-offset: -2px;
     }
+
 
     // Workspaces
     .workspaces {
@@ -161,8 +166,8 @@ window.Bar {
         .systray-btn {
             min-width: 26px;
             min-height: 24px;
-            margin: 6px 1px;
-            padding: 0 4px;
+            margin: 1px 1px;
+            padding: 0 2px;
             border-radius: 5px;
             background: transparent;
 
