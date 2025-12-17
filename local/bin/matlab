@@ -1,0 +1,16 @@
+#!/bin/bash
+# ------------------------------------------------------------
+# MATLAB R2024a WebUI 启动脚本
+# 作者: shacon wang
+# ------------------------------------------------------------
+
+MATLAB_ROOT="/home/shacon/.local/MATLAB/R2024a"
+MATLAB_BIN="$MATLAB_ROOT/bin/matlab"
+
+# 检查 MATLAB 是否存在
+if [ ! -x "$MATLAB_BIN" ]; then
+    echo "❌ MATLAB 可执行文件未找到: $MATLAB_BIN"
+    exit 1
+fi
+
+"$MATLAB_BIN" -webui
