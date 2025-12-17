@@ -1,0 +1,1 @@
+ENV{ID_FS_TYPE}=="ntfs", ENV{UDISKS_MOUNT_OPTIONS_DEFAULTS}="sync,flush"

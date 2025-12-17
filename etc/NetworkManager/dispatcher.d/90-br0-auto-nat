@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+IFACE="$1"
+STATE="$2"
+
+# only wlan0 or br0 state changed.
+[[ "$IFACE" != "wlan0" && "$IFACE" != "br0" ]] && exit 0
+
+BRIDGE="br0"
+WIFI="wlan0"
+
+sysctl -w net.ipv4.ip_forward=1 >/dev/null
+
+iptables -t nat -D POSTROUTING -o "$WIFI" -j MASQUERADE 2>/dev/null || true
+
+WIFI_STATE=$(nmcli -t -f DEVICE,STATE device | grep "^$WIFI:" | cut -d: -f2)
+
+if [[ "$WIFI_STATE" == "connected" ]]; then
+    iptables -t nat -A POSTROUTING -o "$WIFI" -j MASQUERADE
+fi
