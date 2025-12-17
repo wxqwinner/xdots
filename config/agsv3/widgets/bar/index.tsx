@@ -4,7 +4,6 @@ import Gtk from "gi://Gtk?version=4.0"
 import Gdk from "gi://Gdk?version=4.0"
 import Workspaces from "./Workspaces"
 import Clients from "./Clients"
-import FocusedClient from "./FocusedClient"
 import Clock from "./Clock"
 import SystemTray from "../system-tray"
 
@@ -19,9 +18,6 @@ export default function Bar({ monitor }: { monitor: Gdk.Monitor }) {
             name={`bar-${monitorName}`}
             cssClasses={["Bar"]}
             gdkmonitor={monitor}
-            margin-top={4}
-            margin-left={4}
-            margin-right={4}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
             anchor={TOP | LEFT | RIGHT}
             application={app}
@@ -29,8 +25,7 @@ export default function Bar({ monitor }: { monitor: Gdk.Monitor }) {
             <centerbox cssClasses={["centerbox"]}>
                 <box $type="start" halign={Gtk.Align.START}>
                     <Workspaces monitorName={monitorName} />
-                    {/* <Clients monitorName={monitorName} /> */}
-                    <FocusedClient monitorName={monitorName} />
+                    <Clients monitorName={monitorName} />
                 </box>
                 <box $type="center">
                     <Clock />

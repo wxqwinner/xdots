@@ -1,3 +1,5 @@
+
+
 import { togglePopup } from "../../lib/popup-manager"
 
 export default function Power() {
