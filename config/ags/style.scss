@@ -12,6 +12,7 @@ $purple-secondary: #7b2cbf;
 $purple-dim: #5a189a;
 $purple-glow: rgba(157, 78, 221, 0.3);
 $purple-subtle: rgba(157, 78, 221, 0.08);
+$text-active: #ff79c6;
 $text-primary: #e0e0e0;
 $text-secondary: #a0a0a0;
 $text-dim: #606060;
@@ -89,17 +90,19 @@ window.Bar {
             color: $text-dim;
 
             &:hover {
-                background-color: color.adjust($bar-fg, $alpha: -0.84);
-                border-color: color.adjust($accent, $alpha: -0.8);
+                // background-color: color.adjust($bar-fg, $alpha: -0.84);
+                // border-color: color.adjust($accent, $alpha: -0.8);
+                color: $text-secondary;
             }
 
             &.active {
                 background-color: color.adjust($bar-fg, $alpha: -0.8);
+                color: $text-active;
             }
 
             &.occupied {
                 // color: $purple-secondary;
-                color: $bar-fg;
+                color: $text-primary;
                 background: rgba(157, 78, 221, 0.1);
             }
         }
