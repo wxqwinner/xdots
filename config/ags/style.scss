@@ -1465,6 +1465,7 @@ window.NotificationPopup {
         @include popup-content;
         min-width: 340px;
         max-width: 400px;
+        min-height: 990px;
     }
 
     .notification-popup-header {
@@ -1677,7 +1678,7 @@ window.NotificationOSD {
     }
 
     .toast-app-name {
-        font-size: 11px;
+        font-size: 14px;
         color: $text-secondary;
         font-weight: 500;
     }
@@ -1688,7 +1689,7 @@ window.NotificationOSD {
         color: $text-dim;
         padding: 2px 6px;
         border-radius: 4px;
-        font-size: 12px;
+        font-size: 16px;
 
         &:hover {
             background: $bg-hover;
@@ -1697,13 +1698,13 @@ window.NotificationOSD {
     }
 
     .toast-summary {
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 600;
         color: $text-primary;
     }
 
     .toast-body {
-        font-size: 14px;
+        font-size: 16px;
         color: $text-secondary;
         margin-top: 4px;
     }
