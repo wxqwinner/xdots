@@ -38,14 +38,15 @@ $accent: #378DF7;
 
 @mixin popup-content {
     background: linear-gradient(180deg, rgba(18, 18, 24, 0.98) 0%, rgba(13, 13, 13, 0.98) 100%);
-    border: 1px solid $border-subtle;
+    // border: 1px solid $border-subtle;
     border-radius: 12px;
     padding: 16px;
     margin: 8px;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.4),
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    border: 2px solid $purple-primary;
+    // box-shadow:
+    //     0 8px 32px rgba(0, 0, 0, 0.4),
+    //     0 2px 8px rgba(0, 0, 0, 0.2),
+    //     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 @mixin smooth-button {
