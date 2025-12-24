@@ -6,7 +6,7 @@ import AstalNotifd from "gi://AstalNotifd?version=0.1"
 import AstalHyprland from "gi://AstalHyprland?version=0.1"
 
 const NOTIFICATION_TIMEOUT = 5000 // 5 seconds
-const TOAST_WIDTH = 380 // Fixed width for all notifications
+const TOAST_WIDTH = 400 // Fixed width for all notifications
 
 // Get urgency CSS class
 function getUrgencyClass(urgency: AstalNotifd.Urgency): string {

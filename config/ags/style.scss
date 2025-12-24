@@ -1467,7 +1467,7 @@ window.NotificationPopup {
 
     .notification-popup-content {
         @include popup-content;
-        min-width: 340px;
+        min-width: 400px;
         max-width: 400px;
         min-height: 990px;
     }
@@ -1653,6 +1653,7 @@ window.NotificationOSD {
 
     .notification-osd-container {
         margin: 8px;
+        margin-right: 4px;
     }
 
     .notification-toast-wrapper {
@@ -1672,9 +1673,9 @@ window.NotificationOSD {
 
     .notification-toast {
         @include popup-content;
-        width: 380px;
-        min-width: 380px;
-        max-width: 380px;
+        width: 400px;
+        min-width: 400px;
+        max-width: 400px;
         padding: 12px;
         margin-bottom: 8px;
         border-left: 3px solid $purple-primary;
