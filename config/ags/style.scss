@@ -1655,12 +1655,31 @@ window.NotificationOSD {
         margin: 8px;
     }
 
+    .notification-toast-wrapper {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &.toast-enter {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        &.toast-exit {
+            opacity: 0;
+            transform: translateX(100%);
+            margin-bottom: -100px; // Collapse space
+        }
+    }
+
     .notification-toast {
         @include popup-content;
-        min-width: 320px;
+        width: 380px;
+        min-width: 380px;
+        max-width: 380px;
         padding: 12px;
         margin-bottom: 8px;
         border-left: 3px solid $purple-primary;
+        box-sizing: border-box;
+        overflow: hidden;
 
         &.urgency-critical {
             border-left-color: $red-accent;
@@ -1679,9 +1698,17 @@ window.NotificationOSD {
 
     .toast-header {
         margin-bottom: 6px;
+
+        .toast-app-name {
+            flex: 1;
+            min-width: 0;
+        }
     }
 
     .toast-app-name {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
         font-size: 14px;
         color: $text-secondary;
         font-weight: 500;
@@ -1711,5 +1738,9 @@ window.NotificationOSD {
         font-size: 16px;
         color: $text-secondary;
         margin-top: 4px;
+        width: 100%;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        overflow: hidden;
     }
 }
