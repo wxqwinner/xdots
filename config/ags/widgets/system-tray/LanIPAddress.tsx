@@ -1,14 +1,17 @@
 import * as Generic from '../../lib/utils.js';
-import { createState } from "ags"
-import { Gtk } from "ags/gtk4"
+import { createPoll } from "ags/time"
 
 export default function LanIPAddress() {
-    const [lanip, setLanip] = createState("")
+    let last = ""
 
-    setInterval(() => {
+    const lanip = createPoll("", 1000, () => {
         const ip = Generic.getLanIp()
-        if (ip) setLanip(ip)
-    }, 1000)
+        if (ip && ip !== last) {
+            last = ip
+            return ip
+        }
+        return last
+    })
 
     return (
         <button
