@@ -5,31 +5,31 @@ import { fileExists, spawnAsync, touchFile, removeFile } from "../../lib/system-
 let caffeineState = fileExists("/tmp/ags-caffeine-active")
 
 export default function Caffeine() {
-  const btn = new Gtk.Button()
-  btn.add_css_class("systray-btn")
-  if (caffeineState) btn.add_css_class("active")
-  btn.tooltipText = caffeineState ? "Caffeine ON" : "Caffeine OFF"
+    const btn = new Gtk.Button()
+    btn.add_css_class("systray-btn")
+    if (caffeineState) btn.add_css_class("active")
+    btn.tooltipText = caffeineState ? "Caffeine ON" : "Caffeine OFF"
 
-  const icon = new Gtk.Label({ label: caffeineState ? "󰅶" : "󰛊" })
-  icon.add_css_class("icon")
-  btn.set_child(icon)
+    const icon = new Gtk.Label({ label: caffeineState ? "󰅶" : "󰛊" })
+    icon.add_css_class("icon")
+    btn.set_child(icon)
 
-  btn.connect("clicked", () => {
-    caffeineState = !caffeineState
-    if (caffeineState) {
-      btn.add_css_class("active")
-      icon.label = "󰅶"
-      btn.tooltipText = "Caffeine ON"
-      spawnAsync("bash -c 'systemd-inhibit --what=idle --who=ags-caffeine --why=\"Caffeine mode\" sleep infinity &'")
-      touchFile("/tmp/ags-caffeine-active")
-    } else {
-      btn.remove_css_class("active")
-      icon.label = "󰛊"
-      btn.tooltipText = "Caffeine OFF"
-      spawnAsync("pkill -f 'systemd-inhibit.*ags-caffeine'")
-      removeFile("/tmp/ags-caffeine-active")
-    }
-  })
+    btn.connect("clicked", () => {
+        caffeineState = !caffeineState
+        if (caffeineState) {
+            btn.add_css_class("active")
+            icon.label = "󰅶"
+            btn.tooltipText = "Caffeine ON"
+            spawnAsync("killall hypridle")
+            touchFile("/tmp/ags-caffeine-active")
+        } else {
+            btn.remove_css_class("active")
+            icon.label = "󰛊"
+            btn.tooltipText = "Caffeine OFF"
+            spawnAsync("hyprctl dispatch exec hypridle")
+            removeFile("/tmp/ags-caffeine-active")
+        }
+    })
 
-  return btn
+    return btn
 }
