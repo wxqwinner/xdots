@@ -22,6 +22,7 @@ export default function Bar({ monitor }: { monitor: Gdk.Monitor }) {
             margin-top={4}
             margin-left={4}
             margin-right={4}
+            layer={Astal.Layer.BOTTOM}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
             anchor={TOP | LEFT | RIGHT}
             application={app}
