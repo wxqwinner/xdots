@@ -1,0 +1,7 @@
+---
+terminal: alacritty
+class: alacritty-drop
+width: 99
+height: 50
+gap: 44
+position: T

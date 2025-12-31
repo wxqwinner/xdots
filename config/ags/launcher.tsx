@@ -6,6 +6,14 @@ import AstalApps from "gi://AstalApps?version=0.1"
 import app from "ags/gtk4/app"
 
 const MAX_RESULTS = 5
+const ROW_HEIGHT = 40
+const usageCount = new Map<string, number>()
+const USAGE_FILE = GLib.build_filenamev([
+  GLib.get_user_cache_dir(),
+  "ags",
+  "launcher-usage.json",
+])
+
 let apps: AstalApps.Apps | null = null
 
 let searchText = ""
@@ -26,10 +34,44 @@ function getApps() {
   return apps
 }
 
-function updateResults() {
-  if (!listBox || !resultsBox || !mainBox || !launcherWindow) return
+function loadUsage() {
+  try {
+    const [ok, content] = GLib.file_get_contents(USAGE_FILE)
+    if (!ok) return
 
-  // Clear existing children
+    const obj = JSON.parse(new TextDecoder().decode(content))
+    for (const [id, count] of Object.entries(obj)) {
+      usageCount.set(id, count as number)
+    }
+  } catch {
+
+  }
+}
+
+function saveUsage() {
+  try {
+    const dir = GLib.path_get_dirname(USAGE_FILE)
+    GLib.mkdir_with_parents(dir, 0o755)
+
+    const obj: Record<string, number> = {}
+    for (const [id, count] of usageCount) {
+      obj[id] = count
+    }
+
+    GLib.file_set_contents(
+      USAGE_FILE,
+      JSON.stringify(obj),
+    )
+  } catch {
+    // 忽略写失败
+  }
+}
+
+
+function updateResults() {
+  if (!listBox) return
+
+  // 清空 listBox
   let child = listBox.get_first_child()
   while (child) {
     const next = child.get_next_sibling()
@@ -38,32 +80,21 @@ function updateResults() {
   }
 
   if (searchText.length === 0) {
-    results = []
-    resultsBox.visible = false
-    // Force window to shrink by setting minimal default size
-    launcherWindow.set_default_size(1, 1)
-    return
+    results = getDefaultApps()
+  } else {
+    results = getApps().fuzzy_query(searchText).slice(0, MAX_RESULTS)
   }
 
-  results = getApps().fuzzy_query(searchText).slice(0, MAX_RESULTS)
-
-  if (results.length === 0) {
-    resultsBox.visible = false
-    launcherWindow.set_default_size(1, 1)
-    return
-  }
-
-  resultsBox.visible = true
   selectedIndex = 0
 
+  // 实际结果行
   results.forEach((appItem) => {
     const row = new Gtk.ListBoxRow({ canFocus: false })
+    row.set_size_request(-1, ROW_HEIGHT)
 
     const box = new Gtk.Box({
       orientation: Gtk.Orientation.HORIZONTAL,
       spacing: 10,
-      marginTop: 5,
-      marginBottom: 5,
       marginStart: 12,
       marginEnd: 12,
     })
@@ -71,11 +102,9 @@ function updateResults() {
     const icon = new Gtk.Image({ pixelSize: 22 })
     const iconName = appItem.iconName
     if (iconName) {
-      if (iconName.startsWith("/")) {
-        icon.set_from_file(iconName)
-      } else {
-        icon.set_from_icon_name(iconName)
-      }
+      iconName.startsWith("/")
+        ? icon.set_from_file(iconName)
+        : icon.set_from_icon_name(iconName)
     } else {
       icon.set_from_icon_name("application-x-executable")
     }
@@ -94,13 +123,19 @@ function updateResults() {
     listBox.append(row)
   })
 
-  // Select first
+  // 🔑 占位行：补齐高度，防止收缩
+  const fillers = MAX_RESULTS - results.length
+  for (let i = 0; i < fillers; i++) {
+    const filler = new Gtk.ListBoxRow({ canFocus: false })
+    filler.set_size_request(-1, ROW_HEIGHT)
+    filler.set_opacity(0)
+    listBox.append(filler)
+  }
+
   const firstRow = listBox.get_row_at_index(0)
   if (firstRow) listBox.select_row(firstRow)
-
-  // Force window to recalculate size
-  launcherWindow.set_default_size(1, 1)
 }
+
 
 function debouncedUpdate() {
   if (debounceTimer) {
@@ -133,7 +168,13 @@ function selectPrev() {
 
 function launchSelected() {
   if (results.length > 0 && selectedIndex < results.length) {
-    results[selectedIndex].launch()
+    const appItem = results[selectedIndex]
+    const id = appItem.name
+
+    usageCount.set(id, (usageCount.get(id) ?? 0) + 1)
+    saveUsage()
+
+    appItem.launch()
     hideWindow()
   }
 }
@@ -147,12 +188,45 @@ function showWindow() {
   const win = app.get_window("launcher")
   if (win) {
     searchText = ""
-    if (searchEntry) searchEntry.set_text("")
+      if (debounceTimer) {
+      GLib.source_remove(debounceTimer)
+      debounceTimer = null
+    }
+    if (searchEntry) {
+      searchEntry.set_text("")
+    }
+
     updateResults()
     win.show()
-    if (searchEntry) searchEntry.grab_focus()
+
+    GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+      searchEntry?.grab_focus()
+      return GLib.SOURCE_REMOVE
+    })
   }
 }
+
+function getDefaultApps(): AstalApps.Application[] {
+  const all = getApps().get_list()
+
+  return all
+    // 只保留有可执行文件的应用
+    .filter(app => app.executable)
+    .map(app => ({
+      app,
+      count: usageCount.get(app.name) ?? 0,
+    }))
+    // 按使用次数降序排序，次数相同时按名称排序
+    .sort((a, b) => {
+      if (b.count !== a.count) {
+        return b.count - a.count
+      }
+      return a.app.name.localeCompare(b.app.name)
+    })
+    .slice(0, MAX_RESULTS)
+    .map(x => x.app)
+}
+
 
 export function toggleLauncher() {
   const win = app.get_window("launcher")
@@ -166,17 +240,21 @@ export function toggleLauncher() {
 }
 
 export function Launcher() {
+  loadUsage()
+  getApps()
   launcherWindow = new Astal.Window({
     name: "launcher",
     namespace: "ags-launcher",
     application: app,
     anchor: Astal.WindowAnchor.TOP,
     exclusivity: Astal.Exclusivity.IGNORE,
-    keymode: Astal.Keymode.ON_DEMAND,
+    // keymode: Astal.Keymode.ON_DEMAND,
+    keymode: Astal.Keymode.EXCLUSIVE,
     visible: false,
     marginTop: 180,
   })
   launcherWindow.add_css_class("launcher-window")
+  launcherWindow.set_opacity(0.999)
 
   mainBox = new Gtk.Box({
     orientation: Gtk.Orientation.VERTICAL,
@@ -236,10 +314,11 @@ export function Launcher() {
 
   resultsBox = new Gtk.Box({
     orientation: Gtk.Orientation.VERTICAL,
-    visible: false,
+    visible: true,
     vexpand: false,
     valign: Gtk.Align.START,
   })
+  resultsBox.set_size_request(-1, MAX_RESULTS * ROW_HEIGHT)
   resultsBox.add_css_class("results-box")
 
   const separator = new Gtk.Separator({
@@ -260,6 +339,13 @@ export function Launcher() {
     launchSelected()
   })
 
+  const scrolled = new Gtk.ScrolledWindow({
+    vexpand: true,
+    hscrollbar_policy: Gtk.PolicyType.NEVER,
+  })
+  scrolled.set_child(listBox)
+  resultsBox.append(scrolled)
+
   resultsBox.append(separator)
   resultsBox.append(listBox)
 
@@ -279,5 +365,11 @@ export function Launcher() {
   })
 
   launcherWindow.set_child(mainBox)
+  updateResults()
   return launcherWindow
+}
+
+export function initLauncher() {
+  loadUsage()
+  getApps()
 }
