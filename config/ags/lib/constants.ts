@@ -1,8 +1,9 @@
 // Workspace-to-monitor mapping (from hyprland.conf)
 export const WORKSPACE_MONITOR_MAP: Record<string, number[]> = {
-    "eDP-1": [1, 2, 3, 4, 5],      // Center (primary)
-    "DP-1": [],          // Left
-    "HDMI-A-1": [6, 7, 8, 9, 10],      // Right
+    "eDP-1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],      // Center (primary)
+    "DP-2": [],          // Left
+    // "HDMI-A-1": [6, 7, 8, 9, 10],      // Right
+    "DP-1": [6, 7, 8, 9, 10],          // left
 }
 
 // Location for sunrise/sunset calculation (Austin, TX area)
