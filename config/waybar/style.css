@@ -6,7 +6,7 @@
 }
 
 window#waybar {
-    background: #1e1e2e;
+    background: #282a36;
     border: 2px solid #ff79c6;
     border-radius: 14px;
     color: #e0e0e0;
@@ -29,7 +29,7 @@ window#waybar {
 }
 
 #workspaces {
-    background: #181825;
+    /* background: #181825; */
     margin: 2px 4px;
     padding: 2px 6px;
     border-radius: 12px;
@@ -55,7 +55,7 @@ window#waybar {
 }
 
 #workspaces button:hover {
-    background: #313244;
+    background: #44475a;
 }
 
 #window {
