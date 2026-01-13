@@ -1,0 +1,93 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "margin-top": 4,
+    "margin-left": 4,
+    "margin-right": 4,
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/caffeine",
+        "network",
+        "pulseaudio",
+        "battery",
+        "custom/notification"
+    ],
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "disable-scroll": true,
+        "all-outputs": true
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "separate-outputs": true
+    },
+    "clock": {
+        "format": "{:%H:%M  %a, %b %d}",
+        "tooltip-format": "<big>{:%Y-%m-%d}</big>"
+    },
+    "network": {
+        "format-wifi": " {ipaddr}",
+        "format-ethernet": " {ipaddr}",
+        "format-disconnected": "",
+        "tooltip": true
+    },
+    "pulseaudio": {
+        "format": " {volume}%",
+        "format-muted": " muted",
+        "scroll-step": 5
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "tray": {
+        "spacing": 12
+    },
+    "custom/caffeine": {
+        "exec": "~/.config/waybar/scripts/caffeine.sh status",
+        "on-click": "~/.config/waybar/scripts/caffeine.sh toggle",
+        "interval": 1,
+        "return-type": "json"
+    },
+    "custom/notification": {
+        "tooltip": true,
+        "format": "{icon} {0}",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": "󰪑",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}

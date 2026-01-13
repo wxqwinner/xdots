@@ -5,6 +5,8 @@ vim/sessions
 vim/projects.json
 vim/.netrwhist
 vim/plugged
+third_party
+config/quickshell
 
 # py
 __pycache__/
