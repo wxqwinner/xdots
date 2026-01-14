@@ -5,6 +5,14 @@
     min-height: 0;
 }
 
+tooltip {
+    background: #000000;
+}
+
+tooltip label {
+    color: white;
+}
+
 window#waybar {
     background: #282a36;
     border: 2px solid #ff79c6;
@@ -15,9 +23,11 @@ window#waybar {
 #clock,
 #network,
 #pulseaudio,
+#memory,
+#backlight,
 #battery,
 #tray {
-    padding: 0 8px;
+    padding: 0 2px;
     margin: 2px 2px;
     background: transparent;
     border-radius: 10px;
@@ -54,7 +64,7 @@ window#waybar {
     color: #cdd6f4;
 }
 
-#workspaces button:hover {
+#workspaces button:not(.active):hover {
     background: #44475a;
 }
 
@@ -83,11 +93,22 @@ window#waybar {
 }
 
 #battery {
-    padding: 0 8px;
-    margin: 2px 2px;
     background: transparent;
     border-radius: 10px;
     font-size: 16px;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #ffffff;
+    background-color: #26a65b;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
 }
 
 #battery.warning {
@@ -99,20 +120,17 @@ window#waybar {
     font-weight: bold;
 }
 
+
 #network {
-    font-size: 15px;
+    font-size: 16px;
 }
 
 #pulseaudio {
     font-size: 16px;
 }
 
-#tray {
-    padding: 0 8px;
-}
-
 #custom-notification {
-    padding: 0 8px;
+    padding: 0px 16px 0px 0px;
     margin: 2px 2px;
     background: transparent;
     border-radius: 10px;

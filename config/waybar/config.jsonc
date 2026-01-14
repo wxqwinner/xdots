@@ -2,6 +2,7 @@
     "layer": "top",
     "position": "top",
     "height": 30,
+    "reload_style_on_change": true,
     "margin-top": 4,
     "margin-left": 4,
     "margin-right": 4,
@@ -17,6 +18,7 @@
         "custom/caffeine",
         "network",
         "pulseaudio",
+        // "backlight",
         "battery",
         "custom/notification"
     ],
@@ -33,7 +35,7 @@
     },
     "clock": {
         "format": "{:%H:%M  %a, %b %d}",
-        "tooltip-format": "<big>{:%Y-%m-%d}</big>"
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "network": {
         "format-wifi": " {ipaddr}",
@@ -42,24 +44,71 @@
         "tooltip": true
     },
     "pulseaudio": {
-        "format": " {volume}%",
-        "format-muted": " muted",
-        "scroll-step": 5
+        "scroll-step": 5,
+        "format": "{icon}{volume}% {format_source}",
+        "format-bluetooth": "{icon}{volume}%",
+        "format-bluetooth-muted": "{icon}{volume}%",
+        "format-muted": "  {format_source}",
+        "format-source": "{volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "memory": {
+        "format": "{}%"
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery": {
         "states": {
-            "warning": 30,
-            "critical": 15
+            "warning": 20,
+            "critical": 10
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": "  {capacity}%",
+        "format": "{icon}{capacity}%",
+        "format-time": "{H}h {M}min",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
+            "󰂎",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ],
+        "format-charging": "󰉁 {capacity}%",
+        "min-length": 6,
+        "max-length": 7,
+        "tooltip-format": "<b>Discharging</b>: {time}",
+        "tooltip-format-charging": "<b>Charging</b>: {time}",
+        "events": {
+            "on-discharging-warning": "notify-send 'Battery Low (20%)' -u critical -i 'battery-020' -h string:x-canonical-private-synchronous:battery",
+            "on-discharging-critical": "notify-send 'Battery Critical (10%)' -u critical -i 'battery-010' -h string:x-canonical-private-synchronous:battery",
+            "on-charging-100": "notify-send 'Battery Full (100%)' -i 'battery-100-charged' -h string:x-canonical-private-synchronous:battery"
+        }
     },
     "tray": {
         "spacing": 12
@@ -72,7 +121,7 @@
     },
     "custom/notification": {
         "tooltip": true,
-        "format": "{icon} {0}",
+        "format": "{icon}",
         "format-icons": {
             "notification": "󱅫",
             "none": "󰂜",
