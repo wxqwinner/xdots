@@ -18,8 +18,9 @@
         "custom/caffeine",
         "network",
         "pulseaudio",
-        // "backlight",
+        "backlight",
         "battery",
+        "custom/quicksettings",
         "custom/notification"
     ],
     "hyprland/workspaces": {
@@ -45,11 +46,11 @@
     },
     "pulseaudio": {
         "scroll-step": 5,
-        "format": "{icon}{volume}% {format_source}",
-        "format-bluetooth": "{icon}{volume}%",
-        "format-bluetooth-muted": "{icon}{volume}%",
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-bluetooth-muted": "{icon}",
         "format-muted": "  {format_source}",
-        "format-source": "{volume}%",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
             "default": [
@@ -67,7 +68,7 @@
         "format": "{}%"
     },
     "backlight": {
-        "format": "{icon} {percent}%",
+        "format": "{icon}",
         "format-icons": [
             "",
             "",
@@ -78,14 +79,15 @@
             "",
             "",
             ""
-        ]
+        ],
+        "tooltip": true
     },
     "battery": {
         "states": {
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon}{capacity}%",
+        "format": "{icon}",
         "format-time": "{H}h {M}min",
         "format-icons": [
             "󰂎",
@@ -100,7 +102,7 @@
             "󰁹"
         ],
         "format-charging": "󰉁 {capacity}%",
-        "min-length": 6,
+        "min-length": 1,
         "max-length": 7,
         "tooltip-format": "<b>Discharging</b>: {time}",
         "tooltip-format-charging": "<b>Charging</b>: {time}",
@@ -138,5 +140,11 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
+    },
+    "custom/quicksettings": {
+        "format": "󰍜",
+        "tooltip": "Control Center",
+        "on-click": "pgrep better-control >/dev/null && killall better-control || better-control",
+        "interval": 0
     }
 }

@@ -26,11 +26,13 @@ window#waybar {
 #memory,
 #backlight,
 #battery,
+#custom-quicksettings,
 #tray {
-    padding: 0 2px;
+    padding: 0 8px;
     margin: 2px 2px;
     background: transparent;
     border-radius: 10px;
+    font-size: 19px;
 }
 
 #clock {
@@ -95,7 +97,6 @@ window#waybar {
 #battery {
     background: transparent;
     border-radius: 10px;
-    font-size: 16px;
 }
 
 #battery.charging,
@@ -122,17 +123,24 @@ window#waybar {
 
 
 #network {
-    font-size: 16px;
-}
-
-#pulseaudio {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #custom-notification {
-    padding: 0px 16px 0px 0px;
-    margin: 2px 2px;
+    padding: 0px 16px 0px 8px;
     background: transparent;
     border-radius: 10px;
+    font-size: 19px;
+}
+
+#custom-quicksettings {
+    padding: 0 10px;
     font-size: 18px;
+    color: #cdd6f4;
+    background: transparent;
+}
+
+#custom-quicksettings:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
 }
