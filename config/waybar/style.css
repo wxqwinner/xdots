@@ -1,16 +1,19 @@
 * {
-    font-family: "monospace";
     font-size: 16px;
     font-weight: bold;
     min-height: 0;
 }
 
 tooltip {
-    background: #000000;
+    background: transparent;
+    /* border: 2px solid #ff79c6;
+    border-radius: 10px; */
 }
 
 tooltip label {
     color: white;
+    font-size: 20px;
+
 }
 
 window#waybar {
@@ -37,7 +40,7 @@ window#waybar {
 
 #clock {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 #workspaces {
@@ -123,7 +126,7 @@ window#waybar {
 
 
 #network {
-    font-size: 18px;
+    font-size: 17px;
 }
 
 #custom-notification {
