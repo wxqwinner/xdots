@@ -1,174 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-<action>
-	<icon></icon>
-	<name>Convert to JPEG</name>
-	<submenu></submenu>
-	<unique-id>1729672424826804-1</unique-id>
-	<command>convert %f -quality 75 $(basename %f .png).jpg</command>
-	<description></description>
-	<range>*</range>
-	<patterns>*.png</patterns>
-	<image-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r8000c1i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1729741135190271-1</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r8000c1i16 %F</command>
-	<description>to r8000 c1 i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r8000c2i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193401784534-1</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r8000c2i16 %F</command>
-	<description>to r8000 c2 i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r16000c1i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193607408437-2</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r16000c1i16 %F</command>
-	<description>to r16000c1i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r16000c2i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193661050001-3</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r16000c2i16 %F</command>
-	<description>to r16000c2i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r44100c1i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193706542698-4</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r44100c1i16 %F</command>
-	<description>to r44100c1i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r44100c2i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193745775671-5</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r44100c2i16 %F</command>
-	<description>to r44100c2i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r48000c1i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193774555430-6</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r48000c1i16 %F</command>
-	<description>to r48000c1i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>r48000c2i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193801289365-7</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py r48000c2i16 %F</command>
-	<description>to r48000c2i16 wav</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>raw</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1730193849371346-8</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py raw %F</command>
-	<description>to raw</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-<action>
-	<icon></icon>
-	<name>merge_r16000c1i16</name>
-	<submenu>Sox...</submenu>
-	<unique-id>1731316924071142-1</unique-id>
-	<command>python ~/.config/hypr/scripts/sox.py merge_r16000c1i16 %F</command>
-	<description>merge audio</description>
-	<range>*</range>
-	<patterns>*</patterns>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
+    <action>
+        <icon></icon>
+        <name>Convert to JPEG</name>
+        <submenu></submenu>
+        <unique-id>1729672424826804-1</unique-id>
+        <command>convert %f -quality 75 $(basename %f .png).jpg</command>
+        <description></description>
+        <range>*</range>
+        <patterns>*.png</patterns>
+        <image-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r8000c1i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1729741135190271-1</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r8000c1i16 %F</command>
+        <description>to r8000 c1 i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r8000c2i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193401784534-1</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r8000c2i16 %F</command>
+        <description>to r8000 c2 i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r16000c1i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193607408437-2</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r16000c1i16 %F</command>
+        <description>to r16000c1i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r16000c2i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193661050001-3</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r16000c2i16 %F</command>
+        <description>to r16000c2i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r44100c1i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193706542698-4</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r44100c1i16 %F</command>
+        <description>to r44100c1i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r44100c2i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193745775671-5</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r44100c2i16 %F</command>
+        <description>to r44100c2i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r48000c1i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193774555430-6</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r48000c1i16 %F</command>
+        <description>to r48000c1i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>r48000c2i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193801289365-7</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py r48000c2i16 %F</command>
+        <description>to r48000c2i16 wav</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>raw</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1730193849371346-8</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py raw %F</command>
+        <description>to raw</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>merge_r16000c1i16</name>
+        <submenu>Sox...</submenu>
+        <unique-id>1731316924071142-1</unique-id>
+        <command>python ~/.config/hypr/scripts/sox.py merge_r16000c1i16 %F</command>
+        <description>merge audio</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
+    <action>
+        <icon></icon>
+        <name>compress</name>
+        <submenu>Ghostscript...</submenu>
+        <unique-id>1731316924071142-3</unique-id>
+        <command>bash ~/.config/hypr/scripts/compress_pdf.sh %F</command>
+        <description>compress pdf</description>
+        <range>*</range>
+        <patterns>*</patterns>
+        <directories />
+        <audio-files />
+        <image-files />
+        <other-files />
+        <text-files />
+        <video-files />
+    </action>
 </actions>
