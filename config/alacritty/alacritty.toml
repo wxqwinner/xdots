@@ -5,15 +5,15 @@ general.import = ["~/.config/alacritty/dracula.toml"]
 size = 14.0
 
 [font.bold]
-family = "Source Code Pro"
+family = "SauceCodePro Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "Source Code Pro"
+family = "SauceCodePro Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "Source Code Pro"
+family = "SauceCodePro Nerd Font Mono"
 style = "Regular"
 
 [selection]
