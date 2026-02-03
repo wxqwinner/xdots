@@ -18,7 +18,7 @@ tooltip label {
 
 window#waybar {
     background: #282a36;
-    border: 2px solid #ff79c6;
+    border: 2px solid #cba6f7;
     border-radius: 14px;
     color: #e0e0e0;
 }
@@ -78,7 +78,7 @@ window#waybar {
     margin: 2px 2px;
     background: transparent;
     border-radius: 10px;
-    color: #ff79c6;
+    color: #cba6f7;
     font-size: 15px;
 }
 

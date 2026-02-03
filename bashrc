@@ -156,6 +156,8 @@ export ANDROID_SDK_ROOT=$HOME/Android/sdk
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bind:$ANDROID_SDK_ROOT/platform-tools
 
+# starship prompt
+eval "$(starship init bash)"
 
 # how to use
 # cat arch.bashrc > ~/.bashrc

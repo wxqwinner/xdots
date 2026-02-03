@@ -1,1 +1,13 @@
-/home/shacon/Workspace/autoai/autoai/bin/webdata.service
+[Unit]
+Description=WebDataset Local HTTP Server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/shacon/Workspace/autoai/autoai/bin/webdata.py
+Restart=always
+WorkingDirectory=/home/shacon
+StandardOutput=append:/home/shacon/webdata.log
+StandardError=append:/home/shacon/webdata.log
+
+[Install]
+WantedBy=default.target
