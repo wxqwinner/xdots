@@ -19,6 +19,7 @@
         "pulseaudio",
         "backlight",
         "battery",
+        "custom/daily-tasks",
         "custom/quicksettings",
         "custom/notification"
     ],
@@ -112,7 +113,11 @@
         }
     },
     "tray": {
-        "spacing": 12
+        "spacing": 12,
+        "icons": {
+            "wechat": "/home/shacon/.local/share/icons/hicolor/256x256/apps/com.tencent.WeChat.svg"
+        },
+        "show-passive-items": true
     },
     "custom/caffeine": {
         "exec": "~/.config/waybar/scripts/caffeine.sh status",
@@ -144,6 +149,16 @@
         "format": "󰍜",
         "tooltip": "Control Center",
         "on-click": "pgrep better-control >/dev/null && killall better-control || better-control",
-        "interval": 0
+        "interval": 60
+    },
+    "custom/daily-tasks": {
+        "exec": "~/.config/waybar/scripts/daily_tasks.py",
+        "return-type": "json",
+        "interval": 60,
+        "signal": 8,
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/daily_tasks_menu.py",
+        "on-click-right": "~/.config/waybar/scripts/daily_tasks_menu.py"
     }
 }
