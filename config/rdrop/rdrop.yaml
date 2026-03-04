@@ -1,6 +1,6 @@
 ---
-terminal: alacritty
-class: alacritty-drop
+terminal: sh -c "alacritty --class alacritty-rdrop -e bash -c 'tmux attach-session -t tmux 2>/dev/null || tmux new-session -s tmux'"
+class: alacritty-rdrop
 width: 99
 height: 50
 gap: 44
