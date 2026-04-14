@@ -183,3 +183,17 @@ tooltip label {
     font-family: "JetBrains Mono", monospace;
     font-size: 13px;
 }
+
+@keyframes tray-blink {
+    from {
+        opacity: 1.0;
+    }
+
+    to {
+        opacity: 0.3;
+    }
+}
+
+#tray .needs-attention {
+    animation: tray-blink 1s ease-in-out infinite alternate;
+}
