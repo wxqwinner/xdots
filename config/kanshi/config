@@ -1,11 +1,23 @@
+profile external_dual {
+    output eDP-1 disable
+    output HDMI-A-1 enable
+    output DP-1 enable
+}
+
+profile hdmi_only {
+    output eDP-1 disable
+    output HDMI-A-1 enable
+    output DP-1 disable
+}
+
+profile dp_only {
+    output eDP-1 disable
+    output HDMI-A-1 disable
+    output DP-1 enable
+}
+
 profile laptop {
     output eDP-1 enable
     output HDMI-A-1 disable
     output DP-1 disable
-}
-
-profile external {
-    output eDP-1 disable
-    output HDMI-A-1 enable mode 1920x1080@60 position 0,0
-    output DP-1 enable mode 1920x1080@60 position 1920,0
 }
