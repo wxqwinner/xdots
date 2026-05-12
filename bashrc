@@ -137,7 +137,7 @@ unset __conda_setup
 source /usr/share/nvm/init-nvm.sh
 
 # for gdb
-ulimit -c 409600
+#ulimit -c 409600
 
 export PATH="/opt/platforms/x64/rootfs/bin:$PATH"
 export PATH="~/Software/bin:$PATH"
@@ -163,5 +163,8 @@ export ANDROID_NDK=/opt/platforms/android/android-ndk-r23b
 # starship prompt
 eval "$(starship init bash)"
 
+# hifi
+#alias hifi='source /home/shacon/.hifi/env.sh'
+alias hifi='bash /home/shacon/.hifi/hifi.sh'
 # how to use
 # cat arch.bashrc > ~/.bashrc
