@@ -25,17 +25,17 @@ window#waybar {
 
 #clock,
 #network,
-#pulseaudio,
+#wireplumber,
 #memory,
 #backlight,
 #battery,
 #custom-quicksettings,
 #tray {
-    padding: 0 8px;
+    padding: 0 5px;
     margin: 2px 2px;
     background: transparent;
     border-radius: 10px;
-    font-size: 19px;
+    font-size: 20px;
 }
 
 #clock {
@@ -88,7 +88,7 @@ window#waybar {
     background: transparent;
     border-radius: 10px;
     color: #cdd6f4;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 #custom-caffeine.active {
@@ -149,13 +149,14 @@ window#waybar {
 }
 
 #custom-daily-tasks {
-    padding: 0 10px;
-    margin: 0 5px;
-    border-radius: 5px;
+    padding: 0 8px;
+    margin: 0 2px;
+    border-radius: 10px;
     font-weight: bold;
+    font-family: "Source Code Pro";
 }
 
-/* #custom-daily-tasks.not-started {
+#custom-daily-tasks.not-started {
     background-color: #7c7c7c;
     color: #ffffff;
 }
@@ -163,7 +164,7 @@ window#waybar {
 #custom-daily-tasks.in-progress {
     background-color: #3daee9;
     color: #ffffff;
-} */
+}
 
 #custom-daily-tasks.completed {
     background-color: #27ae60;
@@ -180,7 +181,7 @@ tooltip {
 
 tooltip label {
     color: #cdd6f4;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Source Code Pro";
     font-size: 13px;
 }
 

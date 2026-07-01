@@ -16,7 +16,9 @@
     "modules-right": [
         "tray",
         "custom/caffeine",
-        "pulseaudio",
+        // "network",
+        "wireplumber#sink",
+        "wireplumber#source",
         "backlight",
         "battery",
         "custom/daily-tasks",
@@ -44,25 +46,31 @@
         "format-disconnected": "",
         "tooltip": true
     },
-    "pulseaudio": {
-        "scroll-step": 5,
+    "wireplumber#sink": {
         "format": "{icon}",
-        "format-bluetooth": "{icon}",
-        "format-bluetooth-muted": "{icon}",
-        "format-muted": "  {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        },
-        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
-        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-        "on-click": "pavucontrol",
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        "format-muted": "󰖁 静音",
+        "format-icons": [
+            "󰖁", // mute
+            "󰕿", // low
+            "󰖀", // medium
+            "󰕾" // high
+        ],
+        "scroll-step": 5,
+        "max-volume": 100,
+        "tooltip": true,
+        "on-click": "helvum",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+    "wireplumber#source": {
+        "node-type": "Audio/Source",
+        "format": "{icon}",
+        "format-muted": "󰍭 麦关闭",
+        "format-icons": [
+            "󰍭",
+            "󰍬"
+        ],
+        "scroll-step": 3,
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     },
     "memory": {
         "format": "{}%"

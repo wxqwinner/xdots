@@ -1,23 +1,21 @@
+profile laptop {
+    output eDP-1 enable scale 1
+}
+
 profile external_dual {
     output eDP-1 disable
-    output HDMI-A-1 enable
-    output DP-1 enable
+    output HDMI-A-1 enable mode 1920x1080@60 position 0,0 scale 1 adaptive_sync on
+    output DP-1 enable mode 1920x1080@60 position 1920,0 scale 1 adaptive_sync on
 }
 
-profile hdmi_only {
-    output eDP-1 disable
-    output HDMI-A-1 enable
-    output DP-1 disable
-}
-
-profile dp_only {
-    output eDP-1 disable
+profile laptop_dp {
+    output eDP-1 enable mode 1920x1080@60 position 0,0 scale 1 adaptive_sync on
     output HDMI-A-1 disable
-    output DP-1 enable
+    output DP-1 enable mode 1920x1080@60 position 1920,0 scale 1 adaptive_sync on
 }
 
-profile laptop {
-    output eDP-1 enable
-    output HDMI-A-1 disable
+profile laptop_hdmi {
+    output eDP-1 enable mode 1920x1080@60 position 0,0 scale 1 adaptive_sync on
+    output HDMI-A-1 enable mode 1920x1080@60 position 1920,0 scale 1 adaptive_sync on
     output DP-1 disable
 }
