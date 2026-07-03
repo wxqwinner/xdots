@@ -84,6 +84,9 @@ end)
 -- toggle wechat
 hl.bind("SUPER + W", hl.dsp.workspace.toggle_special("wechat"))
 
+-- toggle firefox
+hl.bind("SUPER + D", hl.dsp.workspace.toggle_special("firefox"))
+
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("amixer set Master 5%+"))
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("amixer set Master 5%-"))
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("amixer set Capture toggle"))
@@ -99,3 +102,16 @@ hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/recor
 
 hl.bind("SUPER + SHIFT + O", hl.dsp.exec_cmd('rofi -show rofi-sound -modi "rofi-sound:~/.config/hypr/scripts/rofi-sound-output-chooser.sh"'))
 hl.bind("SUPER + SHIFT + I", hl.dsp.exec_cmd('rofi -show rofi-sound -modi "rofi-sound:~/.config/hypr/scripts/rofi-sound-input-chooser.sh"'))
+
+
+local function zoomBy(factor, minVal)
+    local cur = hl.get_config("cursor.zoom_factor")
+    local newVal = cur * factor
+    if minVal and newVal < minVal then
+        newVal = minVal
+    end
+    hl.config({ cursor = { zoom_factor = newVal } })
+end
+
+hl.bind("SUPER + mouse_down", function() zoomBy(1.1) end)
+hl.bind("SUPER + mouse_up",   function() zoomBy(0.9, 1) end)

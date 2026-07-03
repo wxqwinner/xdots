@@ -50,9 +50,6 @@ hl.window_rule({match={class="tabby"}, workspace=8})
 -- tenacity
 hl.window_rule({match={title="Tenacity"}, workspace=9})
 
--- firefox
-hl.window_rule({match={class="firefox"}, workspace=10})
-
 -- show me the key
 hl.window_rule({match={title="Floating Window - Show Me The Key"}, float=true, pin=true, size={1920, 100}, move={0, 1080*0.83}, no_focus=true, border_size=0, no_blur=true, no_dim=true, no_shadow=true})
 
@@ -118,11 +115,21 @@ hl.workspace_rule({
 
 hl.window_rule({
     match = { class = "wechat" },
-    float = true,
     workspace = "special:wechat",
 })
 
 hl.workspace_rule({
     workspace = "special:wechat",
     on_created_empty = "flatpak run com.tencent.WeChat"
+})
+
+
+hl.workspace_rule({
+    workspace = "special:firefox",
+    on_created_empty = "firefox"
+})
+
+hl.window_rule({
+    match = { class = "firefox" },
+    workspace = "special:firefox",
 })
