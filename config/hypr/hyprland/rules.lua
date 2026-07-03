@@ -113,7 +113,7 @@ hl.workspace_rule({workspace=10, monitor="DP-1"})
 
 hl.workspace_rule({
     workspace = "special:dropterm",
-    on_created_empty = "[float; size 1912 400; move 4 44] alacritty --class dropterm -e bash -c 'tmux attach-session -t tmux 2>/dev/null || tmux new-session -s tmux'"
+    on_created_empty = "[float; size 1912 500; move 4 44] alacritty --class dropterm -e bash -c 'tmux attach-session -t tmux 2>/dev/null || tmux new-session -s tmux'"
 })
 
 hl.window_rule({

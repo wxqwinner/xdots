@@ -46,8 +46,24 @@ hl.bind("SUPER + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 
--- waybar
-hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd("pkill -9 waybar;$wechat_tray_proxy & sleep 1 && waybar;pkill safeeyes; safeeyes"))
+local wechatTrayProxy = "~/.local/bin/wechat-tray-proxy.py"
+local function restart()
+    hl.exec_cmd("pkill -9 waybar")
+    hl.exec_cmd("pkill -9 -f wechat-tray-proxy.py")
+    hl.exec_cmd("pkill safeeyes")
+
+    hl.timer(function()
+        hl.exec_cmd(wechatTrayProxy)
+
+        hl.timer(function()
+            hl.exec_cmd("waybar")
+            hl.exec_cmd("safeeyes")
+        end, { timeout = 1000, type = "oneshot" })
+
+    end, { timeout = 300, type = "oneshot" })
+end
+
+hl.bind("SUPER + SHIFT + R", restart)
 
 -- flameshot
 hl.bind("CTRL + ALT + A", hl.dsp.exec_cmd("QT_QPA_PLATFORM=wayland;flameshot gui"))
