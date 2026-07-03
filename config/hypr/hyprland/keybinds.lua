@@ -1,4 +1,5 @@
 require("hyprland.default")
+require("hyprland.wechat")
 
 hl.bind("SUPER + T", hl.dsp.exec_cmd(terminal))
 
@@ -81,11 +82,8 @@ hl.bind("SUPER + F12", function()
     end, { timeout = 500, type = "oneshot" })
 end)
 
--- toggle wechat
-hl.bind("SUPER + W", hl.dsp.workspace.toggle_special("wechat"))
-
 -- toggle firefox
-hl.bind("SUPER + D", hl.dsp.workspace.toggle_special("firefox"))
+hl.bind("SUPER + A", hl.dsp.workspace.toggle_special("firefox"))
 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("amixer set Master 5%+"))
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("amixer set Master 5%-"))

@@ -113,17 +113,6 @@ hl.workspace_rule({
     on_created_empty = "[float; size 1912 500; move 4 44] alacritty --class dropterm -e bash -c 'tmux attach-session -t tmux 2>/dev/null || tmux new-session -s tmux'"
 })
 
-hl.window_rule({
-    match = { class = "wechat" },
-    workspace = "special:wechat",
-})
-
-hl.workspace_rule({
-    workspace = "special:wechat",
-    on_created_empty = "flatpak run com.tencent.WeChat"
-})
-
-
 hl.workspace_rule({
     workspace = "special:firefox",
     on_created_empty = "firefox"
