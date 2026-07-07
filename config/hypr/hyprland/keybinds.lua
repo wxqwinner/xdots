@@ -1,5 +1,4 @@
 require("hyprland.default")
-require("hyprland.wechat")
 
 hl.bind("SUPER + T", hl.dsp.exec_cmd(terminal))
 
