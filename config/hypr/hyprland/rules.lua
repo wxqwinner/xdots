@@ -112,13 +112,3 @@ hl.workspace_rule({
     workspace = "special:dropterm",
     on_created_empty = "[float; size 1912 500; move 4 44] alacritty --class dropterm -e bash -c 'tmux attach-session -t tmux 2>/dev/null || tmux new-session -s tmux'"
 })
-
-hl.workspace_rule({
-    workspace = "special:firefox",
-    on_created_empty = "firefox"
-})
-
-hl.window_rule({
-    match = { class = "firefox" },
-    workspace = "special:firefox",
-})

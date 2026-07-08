@@ -1,18 +1,17 @@
 require("hyprland.default")
 
-hl.bind("SUPER + T", hl.dsp.exec_cmd(terminal))
-
 hl.bind("SUPER + Delete", hl.dsp.exit())
-hl.bind("SUPER + E", hl.dsp.exec_cmd(files))
+hl.bind("SUPER + T", hl.dsp.exec_cmd(terminal))
+-- hl.bind("SUPER + E", hl.dsp.exec_cmd(files))
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/rofi_apps.sh"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen({"fullscreen", "toggle"}))
-hl.bind("SUPER + X", hl.dsp.window.close())
+hl.bind("SUPER + Z", hl.dsp.window.close())
 
 -- cliphist
-hl.bind("SUPER + C", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/rofi/cliphist-rofi-img -show clipboard -show-icons"))
+hl.bind("SUPER + X", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/rofi/cliphist-rofi-img -show clipboard -show-icons"))
 
 -- dropterm
 hl.bind("ALT + GRAVE", hl.dsp.workspace.toggle_special("dropterm"))
@@ -31,8 +30,8 @@ hl.bind("SUPER + SHIFT + up",    hl.dsp.window.move({ direction = "u" }))
 hl.bind("SUPER + SHIFT + down",  hl.dsp.window.move({ direction = "d" }))
 
 
-hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind("SUPER + TAB", hl.dsp.workspace.toggle_special("magic"))
+hl.bind("SUPER + SHIFT + TAB", hl.dsp.window.move({ workspace = "special:magic" }))
 
 for i = 1, 10 do
     local key = i % 10
@@ -80,9 +79,6 @@ hl.bind("SUPER + F12", function()
         hl.dispatch(hl.dsp.dpms({ action = dpmsOn and "enable" or "disable" }))
     end, { timeout = 500, type = "oneshot" })
 end)
-
--- toggle firefox
-hl.bind("SUPER + A", hl.dsp.workspace.toggle_special("firefox"))
 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("amixer set Master 5%+"))
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("amixer set Master 5%-"))

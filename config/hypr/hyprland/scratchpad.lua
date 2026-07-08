@@ -61,22 +61,34 @@ function Scratchpad.register(opts)
             return
         end
 
+        local active = hl.get_active_workspace()
+
         if w.workspace.name == specialWs then
-            -- 隐藏 -> 显示
-            local active = hl.get_active_workspace()
+            -- 隐藏状态 -> 显示到当前 workspace
+            hl.dispatch(hl.dsp.window.move({ workspace = active.name, window = "address:" .. w.address }))
+            hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
+            positionWindow(w.address)
+        elseif w.workspace.name ~= active.name then
+            -- 可见，但在别的 workspace/显示器 -> 直接跟过来，不经过 special 这一跳
             hl.dispatch(hl.dsp.window.move({ workspace = active.name, window = "address:" .. w.address }))
             hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
             positionWindow(w.address)
         else
-            -- 显示 -> 隐藏
+            -- 已经在当前 workspace 可见 -> 才是真正的"隐藏"
             hl.dispatch(hl.dsp.window.move({ workspace = specialWs, window = "address:" .. w.address, silent = true }))
             hl.dispatch(hl.dsp.workspace.toggle_special(name))
         end
     end
 
+    hl.on("window.open", function(w)
+        if w.class == class then
+            positionWindow(w.address)
+            hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
+        end
+    end)
+
     hl.bind(key, toggle)
 
-    -- 返回句柄，方便需要时手动调用/调试
     return {
         toggle = toggle,
         find = findWindow,
