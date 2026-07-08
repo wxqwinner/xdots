@@ -35,20 +35,11 @@ hl.window_rule({
 -- fcitx5
 hl.window_rule({match={class="fcitxfcit"}, float=true, no_anim=true, no_blur=true, pin=true, immediate=true, stay_focused=true, keep_aspect_ratio=true})
 
--- QQ
-hl.window_rule({match={class="QQ"}, float=true})
-
 -- Zeal
 hl.window_rule({match={class="org.zealdocs.zeal"}, float=true})
 
 -- boxes
 hl.window_rule({match={title="Boxes"}, workspace=7})
-
--- tabby
-hl.window_rule({match={class="tabby"}, workspace=8})
-
--- tenacity
-hl.window_rule({match={title="Tenacity"}, workspace=9})
 
 -- show me the key
 hl.window_rule({match={title="Floating Window - Show Me The Key"}, float=true, pin=true, size={1920, 100}, move={0, 1080*0.83}, no_focus=true, border_size=0, no_blur=true, no_dim=true, no_shadow=true})
@@ -71,9 +62,6 @@ hl.window_rule({match={class="xarchiver"}, float=true})
 hl.window_rule({match={title="File Operation Progress"}, float=true})
 hl.window_rule({match={title="Audio Information"}, float=true})
 hl.window_rule({match={title="Audio Information"}, center=true})
-
--- dropterm
-hl.window_rule({match={class="dropterm"}, no_anim=true})
 
 -- Meld
 hl.window_rule({match={class="org.gnome.Meld"}, float=true, center=true, size={1600, 900}})

@@ -81,6 +81,10 @@ function Scratchpad.register(opts)
     end
 
     hl.on("window.open", function(w)
+        if w.class == class and w.title == "wechat" then
+            return
+        end
+
         if w.class == class then
             positionWindow(w.address)
             hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
