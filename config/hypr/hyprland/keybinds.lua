@@ -2,16 +2,16 @@ require("hyprland.default")
 
 hl.bind("SUPER + Delete", hl.dsp.exit())
 hl.bind("SUPER + T", hl.dsp.exec_cmd(terminal))
--- hl.bind("SUPER + E", hl.dsp.exec_cmd(files))
+hl.bind("SUPER + E", hl.dsp.exec_cmd(files))
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/rofi_apps.sh"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen({"fullscreen", "toggle"}))
-hl.bind("SUPER + Z", hl.dsp.window.close())
+hl.bind("SUPER + X", hl.dsp.window.close())
 
 -- cliphist
-hl.bind("SUPER + X", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/rofi/cliphist-rofi-img -show clipboard -show-icons"))
+hl.bind("SUPER + C", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/rofi/cliphist-rofi-img -show clipboard -show-icons"))
 
 -- dropterm
 hl.bind("ALT + GRAVE", hl.dsp.workspace.toggle_special("dropterm"))

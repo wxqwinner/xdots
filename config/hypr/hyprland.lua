@@ -13,6 +13,7 @@ require("hyprland.scratchpad").register({
     launch_cmd = "flatpak run com.tencent.WeChat",
     key = "SUPER + W",
     fill = true,
+    ignored_titles = { "wechat" },
 })
 
 require("hyprland.scratchpad").register({
@@ -28,22 +29,6 @@ require("hyprland.scratchpad").register({
     class = "tenacity",
     launch_cmd = "tenacity",
     key = "SUPER + D",
-    fill = true,
-})
-
-require("hyprland.scratchpad").register({
-    name = "code",
-    class = "code",
-    launch_cmd = "code",
-    key = "SUPER + C",
-    fill = true,
-})
-
-require("hyprland.scratchpad").register({
-    name = "thunar",
-    class = "thunar",
-    launch_cmd = "thunar -w",
-    key = "SUPER + E",
     fill = true,
 })
 
