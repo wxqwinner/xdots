@@ -8,6 +8,7 @@
     "margin-right": 4,
     "modules-left": [
         "ext/workspaces",
+        // "hyprland/workspaces",
         "hyprland/window"
     ],
     "modules-center": [
@@ -25,11 +26,17 @@
         "custom/quicksettings",
         "custom/notification"
     ],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"e+1\"})' ",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"e-1\"})' "
+    },
     "ext/workspaces": {
         "format": "{name}",
         "on-click": "activate",
         "disable-scroll": true,
-        "all-outputs": true
+        "all-outputs": false,
+        "sort-by-id": true
     },
     "hyprland/window": {
         "format": "{}",
