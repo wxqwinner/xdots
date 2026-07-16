@@ -3,8 +3,8 @@
 Scratchpad = {}
 Scratchpad._instances = Scratchpad._instances or {}
 
--- 记录每台显示器当前显示的是哪个 scratchpad 应用
 local activeOnMonitor = {}
+local classToName = {}  -- class -> scratchpad name 的映射，用于判断"这是不是 scratchpad 应用自己的窗口"
 
 function Scratchpad.register(opts)
     local name = opts.name
@@ -15,6 +15,8 @@ function Scratchpad.register(opts)
     if fill == nil then fill = true end
     local width = opts.width or 950
     local height = opts.height or 1030
+
+    classToName[class] = name
 
     local ignoredTitles = {}
     for _, t in ipairs(opts.ignored_titles or {}) do
@@ -60,7 +62,6 @@ function Scratchpad.register(opts)
         hl.dispatch(hl.dsp.workspace.toggle_special(name))
     end
 
-    -- 供其他 scratchpad 应用调用：如果我当前是显示状态，把我藏起来
     local function hideIfVisible()
         local w = findWindow()
         if w ~= nil and w.workspace.name ~= specialWs then
@@ -80,15 +81,10 @@ function Scratchpad.register(opts)
         local active = hl.get_active_workspace()
         local isShownHere = (w.workspace.name == active.name) and (activeOnMonitor[mon.name] == name)
 
-        -- print("[scratchpad] toggle:", name, "isShownHere=", isShownHere, "w.workspace=", w.workspace.name, "active=", active.name, "mon=", mon.name, "activeOnMonitor[mon]=", activeOnMonitor[mon.name])
         if isShownHere then
-            -- 已经在这台显示器显示 -> 隐藏
             hide(w)
             activeOnMonitor[mon.name] = nil
         else
-            -- 关键：先把这台显示器上之前显示的那个应用完全藏起来，
-            -- 确保它先离开这个 workspace，再让当前应用进来，
-            -- 两者不会有共存于同一 workspace 的时刻，避免 fullscreen 槽位争抢
             local prevName = activeOnMonitor[mon.name]
             if prevName and prevName ~= name and Scratchpad._instances[prevName] then
                 Scratchpad._instances[prevName].hideIfVisible()
@@ -108,6 +104,7 @@ function Scratchpad.register(opts)
 
         positionWindow(w.address)
         hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
+
         local mon = hl.get_active_monitor()
         activeOnMonitor[mon.name] = name
     end)
@@ -122,5 +119,20 @@ function Scratchpad.register(opts)
 
     return Scratchpad._instances[name]
 end
+
+hl.on("window.open", function(w)
+    if classToName[w.class] ~= nil then
+        return
+    end
+
+    local mon = w.monitor
+    if mon == nil then return end
+
+    local activeName = activeOnMonitor[mon.name]
+    if activeName ~= nil and Scratchpad._instances[activeName] then
+        Scratchpad._instances[activeName].hideIfVisible()
+        activeOnMonitor[mon.name] = nil
+    end
+end)
 
 return Scratchpad
