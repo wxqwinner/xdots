@@ -28,7 +28,7 @@ require("hyprland.scratchpad").register({
     name = "tenacity",
     class = "tenacity",
     launch_cmd = "tenacity",
-    key = "SUPER + D",
+    key = "SUPER + Z",
     fill = true,
 })
 

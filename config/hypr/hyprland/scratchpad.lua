@@ -26,6 +26,8 @@ function Scratchpad.register(opts)
 
     local specialWs = "special:" .. name
 
+    hl.workspace_rule({ workspace = specialWs })
+
     hl.window_rule({
         name = name .. "-float",
         match = { class = class },
@@ -78,6 +80,7 @@ function Scratchpad.register(opts)
         local active = hl.get_active_workspace()
         local isShownHere = (w.workspace.name == active.name) and (activeOnMonitor[mon.name] == name)
 
+        -- print("[scratchpad] toggle:", name, "isShownHere=", isShownHere, "w.workspace=", w.workspace.name, "active=", active.name, "mon=", mon.name, "activeOnMonitor[mon]=", activeOnMonitor[mon.name])
         if isShownHere then
             -- 已经在这台显示器显示 -> 隐藏
             hide(w)
@@ -105,6 +108,8 @@ function Scratchpad.register(opts)
 
         positionWindow(w.address)
         hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
+        local mon = hl.get_active_monitor()
+        activeOnMonitor[mon.name] = name
     end)
 
     hl.bind(key, toggle)

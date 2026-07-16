@@ -1,5 +1,8 @@
 -- Goldendict
-hl.window_rule({match={class="GoldenDict-ng"}, float=true, size={800, 600}, center=true})
+hl.window_rule({
+    match = { class="io.github.xiaoyifang.goldendict_ng" },
+    float=true,
+    center=true})
 
 -- Safeeyes
 hl.window_rule({

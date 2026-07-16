@@ -13,6 +13,9 @@ hl.bind("SUPER + X", hl.dsp.window.close())
 -- cliphist
 hl.bind("SUPER + C", hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/rofi/cliphist-rofi-img -show clipboard -show-icons"))
 
+-- Toggle GoldenDict-ng lookup for the selected text
+hl.bind("SUPER + D", hl.dsp.exec_cmd("~/.config/hypr/scripts/goldendict-clipboard.sh"))
+
 -- dropterm
 hl.bind("ALT + GRAVE", hl.dsp.workspace.toggle_special("dropterm"))
 

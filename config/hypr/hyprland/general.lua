@@ -1,4 +1,10 @@
 hl.config({
+
+    -- debug = {
+    --     -- enable_stdout_logs = true,
+    --     disable_logs = false,
+    -- },
+
     input = {
         kb_layout = "us",
         kb_variant = "",
