@@ -6,6 +6,16 @@ Scratchpad._instances = Scratchpad._instances or {}
 local activeOnMonitor = {}
 local classToName = {}  -- class -> scratchpad name 的映射，用于判断"这是不是 scratchpad 应用自己的窗口"
 
+local IGNORED_CLASSES = {
+    ["fcitx5"] = true,
+    ["fcitx"] = true,
+    ["fcitx5-qt"] = true,
+}
+
+function Scratchpad.ignore_class(class)
+    IGNORED_CLASSES[class] = true
+end
+
 function Scratchpad.register(opts)
     local name = opts.name
     local class = opts.class
@@ -122,6 +132,10 @@ end
 
 hl.on("window.open", function(w)
     if classToName[w.class] ~= nil then
+        return
+    end
+
+    if IGNORED_CLASSES[w.class] == true then
         return
     end
 
