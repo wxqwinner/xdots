@@ -38,7 +38,10 @@ function Scratchpad.register(opts)
 
     local specialWs = "special:" .. name
 
-    hl.workspace_rule({ workspace = specialWs })
+    hl.workspace_rule({
+        workspace = specialWs,
+        persistent = true,
+    })
 
     hl.window_rule({
         name = name .. "-float",
