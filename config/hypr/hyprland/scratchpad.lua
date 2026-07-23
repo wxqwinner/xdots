@@ -23,6 +23,8 @@ function Scratchpad.register(opts)
     local fill = opts.fill ~= false
     local width = opts.width or 950
     local height = opts.height or 1030
+    local shownOnMonitor = nil
+    local restoreFocusAddress = nil
 
     classToName[class] = name
 
@@ -61,22 +63,62 @@ function Scratchpad.register(opts)
         end
     end
 
-    local function hide(w)
+    local function rememberFocus(mon, w)
+        shownOnMonitor = mon and mon.name or nil
+        restoreFocusAddress = nil
+
+        local workspace = mon and mon.active_workspace
+        local previous = workspace and workspace.last_window
+        if previous and (not w or previous.address ~= w.address) then
+            restoreFocusAddress = previous.address
+        end
+    end
+
+    local function restoreFocus()
+        local mon = shownOnMonitor and hl.get_monitor(shownOnMonitor) or nil
+        local address = restoreFocusAddress
+        shownOnMonitor = nil
+        restoreFocusAddress = nil
+
+        if address then
+            for _, candidate in pairs(hl.get_windows()) do
+                if candidate.address == address and candidate.mapped then
+                    hl.dispatch(hl.dsp.focus({ window = "address:" .. address }))
+                    return
+                end
+            end
+        end
+
+        if mon then hl.dispatch(hl.dsp.focus({ monitor = mon })) end
+    end
+
+    local function hide(w, shouldRestoreFocus)
         if not w then return end
 
-        hl.dispatch(hl.dsp.window.move({
-            workspace = specialWs,
-            window = "address:" .. w.address,
-            silent = true
-        }))
-        hl.dispatch(hl.dsp.workspace.toggle_special(name))
+        local function moveToScratchpad()
+            hl.dispatch(hl.dsp.window.move({
+                workspace = specialWs,
+                window = "address:" .. w.address,
+                silent = true
+            }))
+            hl.dispatch(hl.dsp.workspace.toggle_special(name))
+            clearActiveName(name)
+        end
 
-        clearActiveName(name)
+        if shouldRestoreFocus then
+            -- Dispatchers in one callback are applied in the same compositor
+            -- cycle. Defer the move so the restored focus is committed first.
+            restoreFocus()
+            hl.timer(moveToScratchpad, { timeout = 1, type = "oneshot" })
+        else
+            moveToScratchpad()
+        end
     end
 
     local function show(w)
         if not w then return end
         local mon = getCursorMonitor()
+        rememberFocus(mon, w)
 
         hl.dispatch(hl.dsp.window.move({
             workspace = mon.active_workspace.name,
@@ -93,6 +135,7 @@ function Scratchpad.register(opts)
     local function toggle()
         local w = findWindow()
         if not w then
+            rememberFocus(getCursorMonitor())
             hl.exec_cmd(launchCmd)
             return
         end
@@ -101,7 +144,7 @@ function Scratchpad.register(opts)
         local isShownHere = (w.workspace.name ~= specialWs) and (activeOnMonitor[mon.name] == name)
 
         if isShownHere then
-            hide(w)
+            hide(w, true)
         else
             local prev = activeOnMonitor[mon.name]
             if prev and prev ~= name and Scratchpad._instances[prev] then
@@ -126,7 +169,7 @@ function Scratchpad.register(opts)
         find = findWindow,
         hideIfVisible = function()
             local w = findWindow()
-            if w and w.workspace.name ~= specialWs then hide(w) end
+            if w and w.workspace.name ~= specialWs then hide(w, false) end
         end,
     }
     return Scratchpad._instances[name]
