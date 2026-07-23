@@ -5,6 +5,12 @@ local activeOnMonitor = {}
 local classToName = {}
 local IGNORED_CLASSES = { fcitx5=true, fcitx=true, fcitx5qt=true }
 
+local function clearActiveName(name)
+    for monitorName, activeName in pairs(activeOnMonitor) do
+        if activeName == name then activeOnMonitor[monitorName] = nil end
+    end
+end
+
 function Scratchpad.ignore_class(class)
     IGNORED_CLASSES[class] = true
 end
@@ -27,7 +33,12 @@ function Scratchpad.register(opts)
     local specialWs = "special:" .. name
 
     hl.workspace_rule({ workspace = specialWs, persistent = true })
-    hl.window_rule({ name = name.."-float", match = { class = class }, float = true })
+    hl.window_rule({
+        name = name.."-float",
+        match = { class = class },
+        float = true,
+        no_anim = true
+    })
 
     local function findWindow()
         for _, w in pairs(hl.get_windows()) do
@@ -52,19 +63,15 @@ function Scratchpad.register(opts)
 
     local function hide(w)
         if not w then return end
-        local mon = getCursorMonitor()
 
-        -- 最佳防闪烁方式：使用 silent move + 避免不必要的 toggle
         hl.dispatch(hl.dsp.window.move({
             workspace = specialWs,
             window = "address:" .. w.address,
             silent = true
         }))
-
-        -- 只在需要时 toggle（如果 special 没打开）
         hl.dispatch(hl.dsp.workspace.toggle_special(name))
 
-        activeOnMonitor[mon.name] = nil
+        clearActiveName(name)
     end
 
     local function show(w)
@@ -79,6 +86,7 @@ function Scratchpad.register(opts)
         hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address }))
         positionWindow(w)
 
+        clearActiveName(name)
         activeOnMonitor[mon.name] = name
     end
 
