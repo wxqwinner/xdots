@@ -35,8 +35,8 @@
         "format": "{name}",
         "on-click": "activate",
         "disable-scroll": true,
-        "all-outputs": false,
-        "sort-by-id": true
+        "all-outputs": false
+
     },
     "hyprland/window": {
         "format": "{}",
