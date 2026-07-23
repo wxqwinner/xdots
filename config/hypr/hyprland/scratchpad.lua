@@ -95,24 +95,15 @@ function Scratchpad.register(opts)
     local function hide(w, shouldRestoreFocus)
         if not w then return end
 
-        local function moveToScratchpad()
-            hl.dispatch(hl.dsp.window.move({
-                workspace = specialWs,
-                window = "address:" .. w.address,
-                silent = true
-            }))
-            hl.dispatch(hl.dsp.workspace.toggle_special(name))
-            clearActiveName(name)
-        end
+        hl.dispatch(hl.dsp.window.move({
+            workspace = specialWs,
+            window = "address:" .. w.address,
+            silent = true
+        }))
+        hl.dispatch(hl.dsp.workspace.toggle_special(name))
 
-        if shouldRestoreFocus then
-            -- Dispatchers in one callback are applied in the same compositor
-            -- cycle. Defer the move so the restored focus is committed first.
-            restoreFocus()
-            hl.timer(moveToScratchpad, { timeout = 1, type = "oneshot" })
-        else
-            moveToScratchpad()
-        end
+        clearActiveName(name)
+        if shouldRestoreFocus then restoreFocus() end
     end
 
     local function show(w)
