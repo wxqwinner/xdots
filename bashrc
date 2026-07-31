@@ -46,28 +46,32 @@ alias ccp='pwd | awk '\''{printf $0}'\'' | xclip -sel clip'
 alias toclip='awk '\''{printf $0}'\'' | xclip -sel clip'
 
 # proxy on/off
-function proxy_on() {
-	export http_proxy=127.0.0.1:12333
-	export https_proxy=127.0.0.1:12333
+function proxyon() {
+    export http_proxy=http://127.0.0.1:12333
+    export https_proxy=http://127.0.0.1:12333
+    export HTTP_PROXY=http://127.0.0.1:12333
+    export HTTPS_PROXY=http://127.0.0.1:12333
+    export no_proxy=localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
+    export NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
 }
 
-function proxy_off() {
-	unset http_proxy
-	unset https_proxy
+function proxyoff() {
+    unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY
 }
 
-function pre_proxy() {
-	export http_proxy=127.0.0.1:12333
-	export https_proxy=127.0.0.1:12333
-	$@
-	unset http_proxy
-	unset https_proxy
+function preproxy() {
+    (
+        export http_proxy=http://127.0.0.1:12333
+        export https_proxy=http://127.0.0.1:12333
+        export HTTP_PROXY=http://127.0.0.1:12333
+        export HTTPS_PROXY=http://127.0.0.1:12333
+        export no_proxy=localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
+        export NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
+        "$@"
+    )
 }
 
-alias proxyon='proxy_on'
-alias proxyoff='proxy_off'
-alias preproxy='pre_proxy'
-alias proxytest='preproxy curl cip.cc'
+alias proxytest='preproxy curl -L cip.cc'
 
 # history command
 export HISTTIMEFORMAT="%Y/%m/%d %T "
